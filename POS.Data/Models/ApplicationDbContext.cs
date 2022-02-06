@@ -21,15 +21,23 @@ namespace POS.Data.Models
         public virtual DbSet<County>  Counties  { get; set; }
         public virtual DbSet<Invoice> Invoices { get; set; }
         public virtual DbSet<MpesaExpressRespons>  MpesaExpressResponses { get; set; }
+        public virtual DbSet<UOM>  UOMs { get; set; }
+        public virtual DbSet<Supplier> Suppliers { get; set; }
+        public virtual DbSet<Brand>  Brands { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<Brand>(entity =>
+            {     
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).HasDefaultValueSql("NEWID()");
+            });
             modelBuilder.Entity<Product>(entity =>
             {
-                entity.Property(e => e.CostPrice).HasColumnType("decimal(18,2)");
-                entity.Property(e => e.SellingPrice).HasColumnType("decimal(18,2)");
+                //entity.Property(e => e.CostPrice).HasColumnType("decimal(18,2)");
+                //entity.Property(e => e.SellingPrice).HasColumnType("decimal(18,2)");
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Id).HasDefaultValueSql("NEWID()");
             });

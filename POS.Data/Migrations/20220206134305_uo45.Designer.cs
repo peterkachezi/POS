@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using POS.Data.Models;
 
 namespace POS.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220206134305_uo45")]
+    partial class uo45
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -663,10 +665,13 @@ namespace POS.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte>("Status")
-                        .HasColumnType("tinyint");
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
 
                     b.Property<Guid>("SupplierId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("UOMId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("UpdateBy")
@@ -678,6 +683,8 @@ namespace POS.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UOMId");
 
                     b.ToTable("Products");
                 });
@@ -938,6 +945,13 @@ namespace POS.Data.Migrations
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("POS.Data.Models.Product", b =>
+                {
+                    b.HasOne("POS.Data.Models.UOM", null)
+                        .WithMany("Products")
+                        .HasForeignKey("UOMId");
                 });
 
             modelBuilder.Entity("POS.Data.Models.Sale", b =>

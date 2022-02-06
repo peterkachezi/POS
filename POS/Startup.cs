@@ -7,6 +7,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using POS.Data.Models;
+using POS.Data.Services.BrandModule;
+using POS.Data.Services.CountyModule;
+using POS.Data.Services.SupplerModule;
+using POS.Data.Services.UnitOfMeasureModule;
 using POS.Extensions;
 using System;
 using System.Collections.Generic;
@@ -34,6 +38,15 @@ namespace POS
             services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
             services.AddScoped<IUserClaimsPrincipalFactory<AppUser>, ApplicationUserClaimsPrincipalFactory>();
+
+            services.AddScoped<IUOMService, UOMService>();
+
+            services.AddScoped<ISupplierService, SupplierService>();
+
+            services.AddScoped<ICountyService, CountyService>();
+
+            services.AddScoped<IBrandService,BrandService>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
