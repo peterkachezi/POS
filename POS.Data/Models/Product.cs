@@ -7,12 +7,15 @@ namespace POS.Data.Models
 {
     public partial class Product
     {
- 
+
         public Guid Id { get; set; }
         [Required]
         [StringLength(100)]
-        public string Name { get; set; }
+        public Guid ProductNameId { get; set; }
         [Required]
+        public decimal CostPrice { get; set; }
+        public decimal SellingPrice { get; set; }
+        public decimal ExpectedProfit { get; set; }
         public string ProductCode { get; set; }
         public DateTime CreateDate { get; set; }
         [Required]
@@ -22,9 +25,10 @@ namespace POS.Data.Models
         [StringLength(128)]
         public string UpdateBy { get; set; }
         public DateTime UpdatedDate { get; set; }
-        public byte Status { get; set; }  
+        public byte Status { get; set; }
         public Guid SupplierId { get; set; }
         public Guid BrandId { get; set; }
+        public Guid UOMId { get; set; }
 
     }
 }

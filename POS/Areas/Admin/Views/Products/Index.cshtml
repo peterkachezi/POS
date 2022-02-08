@@ -31,12 +31,13 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Name</th>
+                                    <th>Product Name</th>
+                                    <th>Product Code</th>
                                     <th>Cost Price</th>
                                     <th>Selling Price</th>
-                                    <th>Profit Margin</th>
-                                    <th>Product Code</th>
-                                    <th>Re-Order Level</th>
+                                    <th>Expected Profit</th>
+                                    <th>Supplier</th>
+
                                     <th>Create Date</th>
                                     <th>Action</th>
                                 </tr>
@@ -51,10 +52,12 @@
                                     {
                                         <tr>
                                             <td>@count</td>
-                                            <td>@item.Name</td>
-
-                                
+                                            <td>@item.FullProductName</td>
                                             <td>@item.ProductCode</td>
+                                            <td>@item.CostPrice</td>
+                                            <td>@item.SellingPrice</td>
+                                            <td>@item.ExpectedProfit</td>
+                                            <td>@item.SupplierName</td>
 
 
                                             <td>@item.CreateDate.ToShortDateString()</td>
@@ -64,7 +67,7 @@
                                                         Active
                                                     </button>
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                        <a class="dropdown-item" href="#" onclick="GetProductInformation('@item.Id')" value="@item.Id">Edit Information</a>
+                                                        <a class="dropdown-item" href="#" onclick="GetProduct('@item.Id')" value="@item.Id">Edit Information</a>
                                                         <a class="dropdown-item" href="#" onclick="DeleteRecord('@item.Id')" value="@item.Id">Delete</a>
                                                     </div>
                                                 </div>
@@ -99,17 +102,30 @@
 
                 <form id="frmCreateProduct" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
 
+                
+
                     <div class="item form-group">
                         <label for="middle-name" class="col-form-label col-md-4 col-sm-4 label-align">Product Name</label>
                         <div class="col-md-6 col-sm-6 ">
-                            <input id="txtName" placeholder="e.g Drinking Water" class="form-control" type="text" name="Name">
+                            <select class="form-control" name="ProductNameId" id="txtProductNameId">
+                                @if (ViewBag.ProductNames != null)
+                                {
+                                    foreach (var item in ViewBag.ProductNames)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                }
+                            </select>
                         </div>
+
+                        @*<button type="button" class="btn btn-success btn-sm" onclick="OpenProductPackingForm()"><i class="fa fa-plus-circle"></i> </button>*@
+
                     </div>
 
                     <div class="item form-group">
                         <label for="middle-name" class="col-form-label col-md-4 col-sm-4 label-align">Select Unit of Measure (UOM)</label>
                         <div class="col-md-6 col-sm-6 ">
-                            <select class="form-control" name="PackagingId">
+                            <select class="form-control" name="UOMId" id="txtUOMId">
                                 @if (ViewBag.UOM != null)
                                 {
                                     foreach (var item in ViewBag.UOM)
@@ -123,6 +139,8 @@
                         @*<button type="button" class="btn btn-success btn-sm" onclick="OpenProductPackingForm()"><i class="fa fa-plus-circle"></i> </button>*@
 
                     </div>
+
+
 
                     <div class="item form-group">
                         <label for="middle-name" class="col-form-label col-md-4 col-sm-4 label-align">Cost Price</label>
@@ -138,17 +156,12 @@
                         </div>
                     </div>
 
-                    <div class="item form-group">
-                        <label for="middle-name" class="col-form-label col-md-4 col-sm-4 label-align">Re-Order Level</label>
-                        <div class="col-md-6 col-sm-6 ">
-                            <input id="txtReOrderLevel" class="form-control numericOnly" type="text" name="ReOrderLevel">
-                        </div>
-                    </div>
+
 
                     <div class="item form-group">
                         <label for="middle-name" class="col-form-label col-md-4 col-sm-4 label-align">Select Supplier</label>
                         <div class="col-md-6 col-sm-6 ">
-                            <select class="form-control" name="SupplierId">
+                            <select class="form-control" name="SupplierId" id="txtSupplierId">
                                 @if (ViewBag.Suppliers != null)
                                 {
                                     foreach (var item in ViewBag.Suppliers)
@@ -164,7 +177,7 @@
                     <div class="item form-group">
                         <label for="middle-name" class="col-form-label col-md-4 col-sm-4 label-align">Select Brand</label>
                         <div class="col-md-6 col-sm-6 ">
-                            <select class="form-control" name="BrandId">
+                            <select class="form-control" id="txtBrandId" name="BrandId">
                                 @if (ViewBag.Brands != null)
                                 {
                                     foreach (var item in ViewBag.Brands)
@@ -181,20 +194,111 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                <button type="button" id="btnSubmitEdit" class="btn btn-success">Submit</button>
+                <button type="button" id="btnSubmit" class="btn btn-success">Submit</button>
             </div>
         </div>
     </div>
 </div>
 
+<div class="modal fade" id="ModalUpdateProduct" tabindex="-1" role="dialog" aria-labelledby="ModalUpdateProductLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title Header" id="ModalCreateProductLabel"> Create Product</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form id="frmUpdateProduct" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+
+                    <input type="hidden" id="txtId" name="Id" />
+
+                    <div class="item form-group">
+                        <label for="middle-name" class="col-form-label col-md-4 col-sm-4 label-align">Product Name</label>
+                        <div class="col-md-6 col-sm-6 ">
+                            <input id="txtName1" placeholder="e.g Drinking Water" class="form-control" type="text" name="Name">
+                        </div>
+                    </div>
 
 
 
 
+                    <div class="item form-group">
+                        <label for="middle-name" class="col-form-label col-md-4 col-sm-4 label-align">Select Unit of Measure (UOM)</label>
+                        <div class="col-md-6 col-sm-6 ">
+                            <select class="form-control" name="UOMId" id="txtUOMId1">
+                                @if (ViewBag.UOM != null)
+                                {
+                                    foreach (var item in ViewBag.UOM)
+                                    {
+                                        <option value="@item.Id">@item.FullName</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+
+                        @*<button type="button" class="btn btn-success btn-sm" onclick="OpenProductPackingForm()"><i class="fa fa-plus-circle"></i> </button>*@
+
+                    </div>
+                    <div class="item form-group">
+                        <label for="middle-name" class="col-form-label col-md-4 col-sm-4 label-align">Cost Price</label>
+                        <div class="col-md-6 col-sm-6 ">
+                            <input id="txtCostPrice1" class="form-control numericOnly" type="text" name="CostPrice">
+                        </div>
+                    </div>
+
+                    <div class="item form-group">
+                        <label for="middle-name" class="col-form-label col-md-4 col-sm-4 label-align">Selling Price</label>
+                        <div class="col-md-6 col-sm-6 ">
+                            <input id="txtSellingPrice1" class="form-control numericOnly" type="text" name="SellingPrice">
+                        </div>
+                    </div>
 
 
 
+                    <div class="item form-group">
+                        <label for="middle-name" class="col-form-label col-md-4 col-sm-4 label-align">Select Supplier</label>
+                        <div class="col-md-6 col-sm-6 ">
+                            <select class="form-control" name="SupplierId" id="txtSupplierId1">
+                                @if (ViewBag.Suppliers != null)
+                                {
+                                    foreach (var item in ViewBag.Suppliers)
+                                    {
+                                        <option value="@item.Id">@item.FullName</option>
+                                    }
+                                }
+                            </select>
+                        </div>
 
+                    </div>
+
+                    <div class="item form-group">
+                        <label for="middle-name" class="col-form-label col-md-4 col-sm-4 label-align">Select Brand</label>
+                        <div class="col-md-6 col-sm-6 ">
+                            <select class="form-control" id="txtBrandId1" name="BrandId">
+                                @if (ViewBag.Brands != null)
+                                {
+                                    foreach (var item in ViewBag.Brands)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" id="btnSubmit" class="btn btn-success">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <style>
 
@@ -240,11 +344,279 @@
 <link href="~/sweetalart/sweetalert.min.css" rel="stylesheet" />
 <script src="~/sweetalart/sweetalert.min.js"></script>
 
-
-
 <script>
     $(document).ready(function () {
         $('#dataTable').DataTable();
 
+    });
+
+
+    $('#btnSubmit').click(function (evt) {
+
+        if (!$('#txtProductNameId').val()) {
+
+            $('#txtProductNameId').focus();
+            swal({
+                position: 'top-end',
+                type: "error",
+                title: "Product Name is a required field",
+                showConfirmButton: true,
+            });
+            return false;
+        }
+
+        if (!$('#txtCostPrice').val()) {
+
+            $('#txtCostPrice').focus();
+            swal({
+                position: 'top-end',
+                type: "error",
+                title: "Cost Price is a required field",
+                showConfirmButton: true,
+            });
+            return false;
+        }
+
+        if (!$('#txtSellingPrice').val()) {
+
+            $('#txtSellingPrice').focus();
+            swal({
+                position: 'top-end',
+                type: "error",
+                title: "Selling Price is a required field",
+                showConfirmButton: true,
+            });
+            return false;
+        }
+
+        if (!$('#txtSupplierId').val()) {
+
+            $('#txtSupplierId').focus();
+            swal({
+                position: 'top-end',
+                type: "error",
+                title: "Supplier is a required field",
+                showConfirmButton: true,
+            });
+            return false;
+        }
+
+        if (!$('#txtBrandId').val()) {
+
+            $('#txtBrandId').focus();
+            swal({
+                position: 'top-end',
+                type: "error",
+                title: "Brand is a required field",
+                showConfirmButton: true,
+            });
+            return false;
+        }
+
+        if (!$('#txtUOMId').val()) {
+
+            $('#txtUOMId').focus();
+            swal({
+                position: 'top-end',
+                type: "error",
+                title: "Unit of Measure is a required field",
+                showConfirmButton: true,
+            });
+            return false;
+        }
+
+
+
+
+        $("#ModalCreateProduct").modal('hide');
+
+        $("#divLoader").show();
+        // Stop the button from submitting the form:
+        evt.preventDefault();
+
+        // Serialize the entire form:
+
+
+        var formData = new FormData($('#frmCreateProduct').get(0));
+
+
+        $.ajax({
+            url: "/Admin/Products/Create/",
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+
+            success: function (response) {
+                if (response.success) {
+
+                    swal({
+                        position: 'top-end',
+                        type: "success",
+                        title: response.responseText,
+                        showConfirmButton: false,
+                    }), setTimeout(function () { location.reload(); }, 3000);
+
+                } else {
+
+                    swal({
+                        position: 'top-end',
+                        type: "error",
+                        title: response.responseText,
+                        showConfirmButton: true,
+                        timer: 5000,
+                    });
+
+                    $("#divLoader").hide();
+                }
+            },
+
+            error: function (response) {
+                alert("error!");
+            },
+            complete: function () {
+                HideLoader();
+            }
+
+
+        });
+
+    });
+
+    function DeleteRecord(e) {
+
+        var id = e;
+
+        console.log(id);
+
+
+        swal(
+
+            {
+                title: "Are you sure?",
+
+                text: "Once deleted, you will not be able to recover this  file!",
+
+                type: "success",
+
+                showCancelButton: true,
+
+                confirmButtonColor: "##62b76e",
+
+                confirmButtonText: "Yes, Procceed!",
+
+                closeOnConfirm: false
+            },
+
+            function () {
+
+                $.ajax({
+
+                    type: "GET",
+
+                    url: "/Admin/Products/Delete/" + id,
+
+                    success: function (response) {
+
+                        if (response.success) {
+
+                            swal({
+
+                                position: 'top-end',
+
+                                type: "success",
+
+                                title: response.responseText,
+
+                                showConfirmButton: false,
+
+                                // timer: 2000,
+
+                            });
+                            setTimeout(function () { location.reload(); }, 3000);
+
+                        }
+
+                        else {
+                            swal({
+                                position: 'top-end',
+                                type: "error",
+                                title: response.responseText,
+                                showConfirmButton: true,
+                                timer: 5000,
+                            });
+
+                        }
+
+                    },
+                    error: function (response) {
+                        swal({
+                            position: 'top-end',
+                            type: "error",
+                            title: "Server error ,kindly contact the admin for assistance",
+                            showConfirmButton: false,
+                            timer: 5000,
+                        });
+
+                    }
+
+                })
+
+            }
+        );
+    }
+
+    function GetProduct(e) {
+        var id = e;
+        console.log(id);
+
+        $.get("/Admin/Products/GetById/?Id=" + id, function (data, status) {
+
+            console.log(data);
+
+            if (data == null) {
+                alert("Does not exist");
+            } else {
+
+                $("#txtId1").val(data.data.id);
+                $("#txtName1").val(data.data.name);
+
+
+
+
+                $('#ModalUpdateProduct').modal({ backdrop: 'static', keyboard: false })
+                $("#ModalUpdateProduct").modal('show');
+            }
+
+        });
+    };
+
+    //Allow users to enter numbers only
+    $(".numericOnly").bind('keypress', function (e) {
+        if (e.keyCode == '9' || e.keyCode == '16') {
+            return;
+        }
+        var code;
+        if (e.keyCode) code = e.keyCode;
+        else if (e.which) code = e.which;
+        if (e.which == 46)
+            return false;
+        if (code == 8 || code == 46)
+            return true;
+        if (code < 48 || code > 57)
+            return false;
+    });
+
+    //Disable paste
+    $(".numericOnly").bind("paste", function (e) {
+        e.preventDefault();
+    });
+
+    $(".numericOnly").bind('mouseenter', function (e) {
+        var val = $(this).val();
+        if (val != '0') {
+            val = val.replace(/[^0-9]+/g, "")
+            $(this).val(val);
+        }
     });
 </script>

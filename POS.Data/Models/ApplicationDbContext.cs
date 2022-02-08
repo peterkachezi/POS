@@ -12,6 +12,7 @@ namespace POS.Data.Models
         {
 
         }
+        public virtual DbSet<ProductName>  ProductNames { get; set; }
         public virtual DbSet<AppUser> AppUsers { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<CustomerOrder> CustomerOrders { get; set; }
@@ -36,8 +37,8 @@ namespace POS.Data.Models
             });
             modelBuilder.Entity<Product>(entity =>
             {
-                //entity.Property(e => e.CostPrice).HasColumnType("decimal(18,2)");
-                //entity.Property(e => e.SellingPrice).HasColumnType("decimal(18,2)");
+                entity.Property(e => e.CostPrice).HasColumnType("decimal(18,2)");
+                entity.Property(e => e.SellingPrice).HasColumnType("decimal(18,2)");
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Id).HasDefaultValueSql("NEWID()");
             });

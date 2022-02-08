@@ -10,7 +10,12 @@ namespace POS.Data.Services.ProductModule
         Task<ProductDTO> Create(ProductDTO productDTO);
         Task<ProductDTO> Update(ProductDTO productDTO);
         Task<bool> Delete(Guid Id);
+        Task<bool> DeleteProductName(Guid Id);
         Task<ProductDTO> GetById(Guid Id);
         Task<List<ProductDTO>> GetAll();
+        Task<ProductNameDTO> CreateProductName(ProductNameDTO productNameDTO);
+        Task<List<ProductNameDTO>> GetAllProductName();
+        Task<ProductNameDTO> GetProductNamesById(Guid Id);
+        Task<ProductNameDTO> UpdateProductName(ProductNameDTO productNameDTO);
     }
 }
