@@ -51,7 +51,6 @@ namespace POS.Areas.Admin.Controllers
 
             return View(product);
         }
-
         public async Task<IActionResult> GetProducts()
         {
             try
@@ -67,7 +66,6 @@ namespace POS.Areas.Admin.Controllers
                 return null;
             }
         }
-
         public IActionResult ProductName()
         {
 
@@ -88,8 +86,6 @@ namespace POS.Areas.Admin.Controllers
                 return null;
             }
         }
-
-
         public async Task<IActionResult> Create(ProductDTO productDTO)
         {
             try
@@ -126,8 +122,7 @@ namespace POS.Areas.Admin.Controllers
                 return null;
             }
         }
-
-        public async Task<IActionResult> CreateProductName(ProductNameDTO  productNameDTO)
+        public async Task<IActionResult> CreateProductName(ProductNameDTO productNameDTO)
         {
             try
             {
@@ -163,7 +158,6 @@ namespace POS.Areas.Admin.Controllers
                 return null;
             }
         }
-
         public async Task<IActionResult> GetProductNamesById(Guid Id)
         {
             try
@@ -196,7 +190,6 @@ namespace POS.Areas.Admin.Controllers
             }
 
         }
-
         public async Task<IActionResult> Update(ProductDTO productDTO)
         {
             try
@@ -221,9 +214,8 @@ namespace POS.Areas.Admin.Controllers
                 return null;
             }
 
-        }     
-        
-        public async Task<IActionResult> UpdateProductName(ProductNameDTO  productNameDTO)
+        }
+        public async Task<IActionResult> UpdateProductName(ProductNameDTO productNameDTO)
         {
             try
             {
@@ -262,6 +254,8 @@ namespace POS.Areas.Admin.Controllers
 
                         ProductNameId = data.ProductNameId,
 
+                        ProductName = data.ProductName,
+
                         CostPrice = data.CostPrice,
 
                         SellingPrice = data.SellingPrice,
@@ -271,6 +265,8 @@ namespace POS.Areas.Admin.Controllers
                         ProductCode = data.ProductCode,
 
                         UOMId = data.UOMId,
+
+                        UOMName = data.UOMName,
 
                         CreateDate = data.CreateDate,
 
@@ -283,6 +279,12 @@ namespace POS.Areas.Admin.Controllers
                         SupplierId = data.SupplierId,
 
                         BrandId = data.BrandId,
+
+                        CreatedByName = data.CreatedByName,
+
+                        SupplierName = data.SupplierName,
+
+                        BrandName = data.BrandName,
                     };
 
                     return Json(new { data = file });
@@ -320,7 +322,6 @@ namespace POS.Areas.Admin.Controllers
                 return null;
             }
         }
-        
         public async Task<IActionResult> DeleteProductName(Guid Id)
         {
             try
@@ -343,6 +344,65 @@ namespace POS.Areas.Admin.Controllers
                 return null;
             }
         }
+        public async Task<IActionResult> GetByProductCode(string productCode)
+        {
+            try
+            {
+                var data = await productService.GetByProductCode(productCode);
 
+                if (data != null)
+                {
+                    ProductDTO file = new ProductDTO
+                    {
+                        Id = data.Id,
+
+                        ProductNameId = data.ProductNameId,
+
+                        ProductName = data.ProductName,
+
+                        CostPrice = data.CostPrice,
+
+                        SellingPrice = data.SellingPrice,
+
+                        ExpectedProfit = data.ExpectedProfit,
+
+                        ProductCode = data.ProductCode,
+
+                        UOMId = data.UOMId,
+
+                        UOMName = data.UOMName,
+
+                        CreateDate = data.CreateDate,
+
+                        CreatedBy = data.CreatedBy,
+
+                        UpdateBy = data.CreatedBy,
+
+                        UpdatedDate = data.UpdatedDate,
+
+                        SupplierId = data.SupplierId,
+
+                        BrandId = data.BrandId,
+
+                        CreatedByName = data.CreatedByName,
+
+                        SupplierName = data.SupplierName,
+
+                        BrandName = data.BrandName,
+                    };
+
+                    return Json(new { data = file });
+                }
+
+                return Json(new { data = false });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+
+                return null;
+            }
+
+        }
     }
 }

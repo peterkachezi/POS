@@ -17,5 +17,7 @@ namespace POS.Data.Services.ProductModule
         Task<List<ProductNameDTO>> GetAllProductName();
         Task<ProductNameDTO> GetProductNamesById(Guid Id);
         Task<ProductNameDTO> UpdateProductName(ProductNameDTO productNameDTO);
+
+        Task<ProductDTO> GetByProductCode(string productCode);
     }
 }

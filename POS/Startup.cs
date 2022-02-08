@@ -10,6 +10,7 @@ using POS.Data.Models;
 using POS.Data.Services.BrandModule;
 using POS.Data.Services.CountyModule;
 using POS.Data.Services.ProductModule;
+using POS.Data.Services.StockModule;
 using POS.Data.Services.SupplerModule;
 using POS.Data.Services.UnitOfMeasureModule;
 using POS.Extensions;
@@ -49,6 +50,8 @@ namespace POS
             services.AddScoped<IBrandService,BrandService>();
 
             services.AddScoped<IProductService, ProductService>();
+
+            services.AddScoped<IStockService, StockService>();
             
         }
 

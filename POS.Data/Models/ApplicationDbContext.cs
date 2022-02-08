@@ -25,6 +25,7 @@ namespace POS.Data.Models
         public virtual DbSet<UOM>  UOMs { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<Brand>  Brands { get; set; }
+        public virtual DbSet<Stock>   Stocks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -35,6 +36,7 @@ namespace POS.Data.Models
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Id).HasDefaultValueSql("NEWID()");
             });
+
             modelBuilder.Entity<Product>(entity =>
             {
                 entity.Property(e => e.CostPrice).HasColumnType("decimal(18,2)");

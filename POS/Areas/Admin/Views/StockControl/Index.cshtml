@@ -1,4 +1,4 @@
-﻿@model IEnumerable<POS.Data.DTOs.ProductModule.ProductDTO>
+﻿@model IEnumerable<POS.Data.DTOs.StockModule.StockDTO>
 @{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
@@ -31,12 +31,12 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Product Name</th>
+                                
                                     <th>Product Code</th>
                                     <th>Cost Price</th>
                                     <th>Selling Price</th>
                                     <th>Expected Profit</th>
-                                    <th>Supplier</th>
+                            
 
                                     <th>Create Date</th>
                                     <th>Action</th>
@@ -52,12 +52,12 @@
                                     {
                                         <tr>
                                             <td>@count</td>
-                                            <td>@item.FullProductName</td>
+                         
                                             <td>@item.ProductCode</td>
                                             <td>@item.CostPrice</td>
                                             <td>@item.SellingPrice</td>
                                             <td>@item.ExpectedProfit</td>
-                                            <td>@item.SupplierName</td>
+                                 
 
 
                                             <td>@item.CreateDate.ToShortDateString()</td>
@@ -89,216 +89,6 @@
 </div>
 
 
-<div class="modal fade" id="ModalCreateProduct" tabindex="-1" role="dialog" aria-labelledby="ModalCreateProductLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg " role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title Header" id="ModalCreateProductLabel"> Create Product</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-
-                <form id="frmCreateProduct" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
-
-                
-
-                    <div class="item form-group">
-                        <label for="middle-name" class="col-form-label col-md-4 col-sm-4 label-align">Product Name</label>
-                        <div class="col-md-6 col-sm-6 ">
-                            <select class="form-control" name="ProductNameId" id="txtProductNameId">
-                                @if (ViewBag.ProductNames != null)
-                                {
-                                    foreach (var item in ViewBag.ProductNames)
-                                    {
-                                        <option value="@item.Id">@item.Name</option>
-                                    }
-                                }
-                            </select>
-                        </div>
-
-                        @*<button type="button" class="btn btn-success btn-sm" onclick="OpenProductPackingForm()"><i class="fa fa-plus-circle"></i> </button>*@
-
-                    </div>
-
-                    <div class="item form-group">
-                        <label for="middle-name" class="col-form-label col-md-4 col-sm-4 label-align">Select Unit of Measure (UOM)</label>
-                        <div class="col-md-6 col-sm-6 ">
-                            <select class="form-control" name="UOMId" id="txtUOMId">
-                                @if (ViewBag.UOM != null)
-                                {
-                                    foreach (var item in ViewBag.UOM)
-                                    {
-                                        <option value="@item.Id">@item.FullName</option>
-                                    }
-                                }
-                            </select>
-                        </div>
-
-                        @*<button type="button" class="btn btn-success btn-sm" onclick="OpenProductPackingForm()"><i class="fa fa-plus-circle"></i> </button>*@
-
-                    </div>
-
-
-
-                    <div class="item form-group">
-                        <label for="middle-name" class="col-form-label col-md-4 col-sm-4 label-align">Cost Price</label>
-                        <div class="col-md-6 col-sm-6 ">
-                            <input id="txtCostPrice" class="form-control numericOnly" type="text" name="CostPrice">
-                        </div>
-                    </div>
-
-                    <div class="item form-group">
-                        <label for="middle-name" class="col-form-label col-md-4 col-sm-4 label-align">Selling Price</label>
-                        <div class="col-md-6 col-sm-6 ">
-                            <input id="txtSellingPrice" class="form-control numericOnly" type="text" name="SellingPrice">
-                        </div>
-                    </div>
-
-
-
-                    <div class="item form-group">
-                        <label for="middle-name" class="col-form-label col-md-4 col-sm-4 label-align">Select Supplier</label>
-                        <div class="col-md-6 col-sm-6 ">
-                            <select class="form-control" name="SupplierId" id="txtSupplierId">
-                                @if (ViewBag.Suppliers != null)
-                                {
-                                    foreach (var item in ViewBag.Suppliers)
-                                    {
-                                        <option value="@item.Id">@item.FullName</option>
-                                    }
-                                }
-                            </select>
-                        </div>
-
-                    </div>
-
-                    <div class="item form-group">
-                        <label for="middle-name" class="col-form-label col-md-4 col-sm-4 label-align">Select Brand</label>
-                        <div class="col-md-6 col-sm-6 ">
-                            <select class="form-control" id="txtBrandId" name="BrandId">
-                                @if (ViewBag.Brands != null)
-                                {
-                                    foreach (var item in ViewBag.Brands)
-                                    {
-                                        <option value="@item.Id">@item.Name</option>
-                                    }
-                                }
-                            </select>
-                        </div>
-
-                    </div>
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                <button type="button" id="btnSubmit" class="btn btn-success">Submit</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="ModalUpdateProduct" tabindex="-1" role="dialog" aria-labelledby="ModalUpdateProductLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg " role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title Header" id="ModalCreateProductLabel"> Create Product</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-
-                <form id="frmUpdateProduct" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
-
-                    <input type="hidden" id="txtId" name="Id" />
-
-                    <div class="item form-group">
-                        <label for="middle-name" class="col-form-label col-md-4 col-sm-4 label-align">Product Name</label>
-                        <div class="col-md-6 col-sm-6 ">
-                            <input id="txtName1" placeholder="e.g Drinking Water" class="form-control" type="text" name="Name">
-                        </div>
-                    </div>
-
-
-
-
-                    <div class="item form-group">
-                        <label for="middle-name" class="col-form-label col-md-4 col-sm-4 label-align">Select Unit of Measure (UOM)</label>
-                        <div class="col-md-6 col-sm-6 ">
-                            <select class="form-control" name="UOMId" id="txtUOMId1">
-                                @if (ViewBag.UOM != null)
-                                {
-                                    foreach (var item in ViewBag.UOM)
-                                    {
-                                        <option value="@item.Id">@item.FullName</option>
-                                    }
-                                }
-                            </select>
-                        </div>
-
-                        @*<button type="button" class="btn btn-success btn-sm" onclick="OpenProductPackingForm()"><i class="fa fa-plus-circle"></i> </button>*@
-
-                    </div>
-                    <div class="item form-group">
-                        <label for="middle-name" class="col-form-label col-md-4 col-sm-4 label-align">Cost Price</label>
-                        <div class="col-md-6 col-sm-6 ">
-                            <input id="txtCostPrice1" class="form-control numericOnly" type="text" name="CostPrice">
-                        </div>
-                    </div>
-
-                    <div class="item form-group">
-                        <label for="middle-name" class="col-form-label col-md-4 col-sm-4 label-align">Selling Price</label>
-                        <div class="col-md-6 col-sm-6 ">
-                            <input id="txtSellingPrice1" class="form-control numericOnly" type="text" name="SellingPrice">
-                        </div>
-                    </div>
-
-
-
-                    <div class="item form-group">
-                        <label for="middle-name" class="col-form-label col-md-4 col-sm-4 label-align">Select Supplier</label>
-                        <div class="col-md-6 col-sm-6 ">
-                            <select class="form-control" name="SupplierId" id="txtSupplierId1">
-                                @if (ViewBag.Suppliers != null)
-                                {
-                                    foreach (var item in ViewBag.Suppliers)
-                                    {
-                                        <option value="@item.Id">@item.FullName</option>
-                                    }
-                                }
-                            </select>
-                        </div>
-
-                    </div>
-
-                    <div class="item form-group">
-                        <label for="middle-name" class="col-form-label col-md-4 col-sm-4 label-align">Select Brand</label>
-                        <div class="col-md-6 col-sm-6 ">
-                            <select class="form-control" id="txtBrandId1" name="BrandId">
-                                @if (ViewBag.Brands != null)
-                                {
-                                    foreach (var item in ViewBag.Brands)
-                                    {
-                                        <option value="@item.Id">@item.Name</option>
-                                    }
-                                }
-                            </select>
-                        </div>
-
-                    </div>
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                <button type="button" id="btnSubmit" class="btn btn-success">Submit</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <style>
 
@@ -349,6 +139,7 @@
         $('#dataTable').DataTable();
 
     });
+
 
     $('#btnSubmit').click(function (evt) {
 
@@ -567,7 +358,6 @@
 
     function GetProduct(e) {
         var id = e;
-
         console.log(id);
 
         $.get("/Admin/Products/GetById/?Id=" + id, function (data, status) {
@@ -620,3 +410,4 @@
         }
     });
 </script>
+

@@ -131,7 +131,7 @@ namespace POS.Data.Services.ProductModule
 
                                    UOMId = p.UOMId,
 
-                                   UOMName = uom.Name +" " +uom.Unit,                            
+                                   UOMName = uom.Name + " " + uom.Unit,
 
                                    CreateDate = p.CreateDate,
 
@@ -163,40 +163,134 @@ namespace POS.Data.Services.ProductModule
                 return null;
             }
         }
+        public async Task<ProductDTO> GetByProductCode(string productCode)
+        {
+            try
+            {
+                var product = (from p in context.Products
+
+                               join s in context.Suppliers on p.SupplierId equals s.Id
+
+                               join u in context.AppUsers on p.CreatedBy equals u.Id
+
+                               join b in context.Brands on p.BrandId equals b.Id
+
+                               join prodname in context.ProductNames on p.ProductNameId equals prodname.Id
+
+                               join uom in context.UOMs on p.UOMId equals uom.Id
+
+                               where p.ProductCode == productCode
+
+                               select new ProductDTO
+                               {
+                                   Id = p.Id,
+
+                                   ProductNameId = p.ProductNameId,
+
+                                   ProductName = prodname.Name,
+
+                                   CostPrice = p.CostPrice,
+
+                                   SellingPrice = p.SellingPrice,
+
+                                   ExpectedProfit = p.ExpectedProfit,
+
+                                   ProductCode = p.ProductCode,
+
+                                   UOMId = p.UOMId,
+
+                                   UOMName = uom.Name + " " + uom.Unit,
+
+                                   CreateDate = p.CreateDate,
+
+                                   CreatedBy = p.CreatedBy,
+
+                                   UpdateBy = p.CreatedBy,
+
+                                   UpdatedDate = p.UpdatedDate,
+
+                                   SupplierId = p.SupplierId,
+
+                                   BrandId = p.BrandId,
+
+                                   CreatedByName = u.FirstName + " " + u.LastName,
+
+                                   SupplierName = s.FirstName + " " + s.LastName,
+
+                                   BrandName = b.Name,
+
+                               }).FirstOrDefaultAsync();
+
+                return await product;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+
+                return null;
+            }
+        }
         public async Task<ProductDTO> GetById(Guid Id)
         {
             try
             {
-                var product = await context.Products.FindAsync(Id);
+                var product = (from p in context.Products
 
-                return new ProductDTO
-                {
-                    Id = product.Id,
+                               join s in context.Suppliers on p.SupplierId equals s.Id
 
-                    ProductNameId = product.ProductNameId,
+                               join u in context.AppUsers on p.CreatedBy equals u.Id
 
-                    CostPrice = product.CostPrice,
+                               join b in context.Brands on p.BrandId equals b.Id
 
-                    SellingPrice = product.SellingPrice,
+                               join prodname in context.ProductNames on p.ProductNameId equals prodname.Id
 
-                    ExpectedProfit = product.ExpectedProfit,
+                               join uom in context.UOMs on p.UOMId equals uom.Id
 
-                    ProductCode = product.ProductCode,
+                               where p.Id == Id
 
-                    UOMId = product.UOMId,
+                               select new ProductDTO
+                               {
+                                   Id = p.Id,
 
-                    CreateDate = product.CreateDate,
+                                   ProductNameId = p.ProductNameId,
 
-                    CreatedBy = product.CreatedBy,
+                                   ProductName = prodname.Name,
 
-                    UpdateBy = product.CreatedBy,
+                                   CostPrice = p.CostPrice,
 
-                    UpdatedDate = product.UpdatedDate,
+                                   SellingPrice = p.SellingPrice,
 
-                    SupplierId = product.SupplierId,
+                                   ExpectedProfit = p.ExpectedProfit,
 
-                    BrandId = product.BrandId,
-                };
+                                   ProductCode = p.ProductCode,
+
+                                   UOMId = p.UOMId,
+
+                                   UOMName = uom.Name + " " + uom.Unit,
+
+                                   CreateDate = p.CreateDate,
+
+                                   CreatedBy = p.CreatedBy,
+
+                                   UpdateBy = p.CreatedBy,
+
+                                   UpdatedDate = p.UpdatedDate,
+
+                                   SupplierId = p.SupplierId,
+
+                                   BrandId = p.BrandId,
+
+                                   CreatedByName = u.FirstName + " " + u.LastName,
+
+                                   SupplierName = s.FirstName + " " + s.LastName,
+
+                                   BrandName = b.Name,
+
+                               }).FirstOrDefaultAsync();
+
+                return await product;
+
             }
             catch (Exception ex)
             {
@@ -323,7 +417,7 @@ namespace POS.Data.Services.ProductModule
                 CreateDate = brand.CreateDate,
             };
         }
-        public async Task<ProductNameDTO> UpdateProductName(ProductNameDTO  productNameDTO)
+        public async Task<ProductNameDTO> UpdateProductName(ProductNameDTO productNameDTO)
         {
             try
             {
@@ -349,7 +443,6 @@ namespace POS.Data.Services.ProductModule
                 return null;
             }
         }
-
         public async Task<bool> DeleteProductName(Guid Id)
         {
             try
@@ -376,5 +469,6 @@ namespace POS.Data.Services.ProductModule
                 return false;
             }
         }
+
     }
 }
