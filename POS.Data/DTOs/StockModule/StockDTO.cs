@@ -15,11 +15,13 @@ namespace POS.Data.DTOs.StockModule
         public string CreatedBy { get; set; }
         public string CreatedByName { get; set; }
         public string UpdatedBy { get; set; }
-
+        public string NewCreateDate { get { return CreateDate.ToShortDateString(); } }
         public decimal CostPrice { get; set; }
         public decimal SellingPrice { get; set; }
         public decimal ExpectedProfit { get; set; }
-        public string ProductNames { get; set; }
-
+        public string ProductName { get; set; }
+        public string UOMName { get; set; }
+        public string BrandName { get; set; }
+        public string FullProductName => BrandName + " " + ProductName + " " + UOMName;
     }
 }

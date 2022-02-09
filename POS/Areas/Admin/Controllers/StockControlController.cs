@@ -49,10 +49,17 @@ namespace POS.Areas.Admin.Controllers
             return View();
         }
 
+        public async Task<IActionResult> GetStocks()
+        {
+            var stock = await stockService.GetAll();
+
+
+            return Json(new { data = stock });
+        }
+        
         public IActionResult StockEntry()
         {
            
-
             return View();
         }
 
@@ -69,11 +76,11 @@ namespace POS.Areas.Admin.Controllers
                 if (result != null)
                 {
 
-                    return Json(new { success = true, responseText = "Record has been successfully saved" });
+                    return Json(new { success = true, responseText = "Stock has been successfully updated" });
                 }
                 else
                 {
-                    return Json(new { success = false, responseText = "Unable to save record" });
+                    return Json(new { success = false, responseText = "Unable to updated stock" });
                 }
             }
             catch (Exception ex)

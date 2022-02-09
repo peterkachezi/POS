@@ -3,6 +3,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
+
 <!-- Our Products Table -->
 <div class="col-md-12 col-sm-12 ">
     <div class="x_panel">
@@ -84,39 +85,6 @@
     </div>
 </div>
 
-<div class="modal fade" id="ModalUpdateBrand" tabindex="-1" role="dialog" aria-labelledby="ModalUpdateBrandLabel" aria-hidden="true">
-    <div class="modal-dialog " role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title Header" id="ModalUpdateBrandLabel"> Update Brand Information</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-
-                <form id="frmUpdateBrand">
-
-                    <input type="hidden" id="txtId1" name="Id" />
-
-                    <div class="">
-                        <label>Brand  Name</label>
-
-                        <input id="txtName1" class="form-control" type="text" name="Name">
-
-                    </div>
-
-                  
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                <button type="button" id="btnSubmitEdit" class="btn btn-success">Submit</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 <div id="divLoader" style="display:none;" class="loader">

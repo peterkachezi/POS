@@ -19,7 +19,7 @@ namespace POS.Data.Services.StockModule
         }
         public async Task<StockDTO> Create(StockDTO stockDTO)
         {
-           
+
             bool isExist = context.Stocks.Any(x => x.ProductId == stockDTO.ProductId);
 
             if (isExist == false)
@@ -47,7 +47,7 @@ namespace POS.Data.Services.StockModule
 
                 await context.SaveChangesAsync();
             }
-            else if(isExist==true)
+            else if (isExist == true)
             {
                 var findStockId = await context.Stocks.Where(x => x.ProductId == stockDTO.ProductId).FirstOrDefaultAsync();
 
@@ -105,6 +105,10 @@ namespace POS.Data.Services.StockModule
 
                              join pn in context.ProductNames on p.ProductNameId equals pn.Id
 
+                             join b in context.Brands on p.BrandId equals b.Id
+
+                             join oum in context.UOMs on p.UOMId equals oum.Id
+
                              select new StockDTO
                              {
                                  Id = s.Id,
@@ -131,7 +135,11 @@ namespace POS.Data.Services.StockModule
 
                                  ExpectedProfit = p.ExpectedProfit,
 
-                                 ProductNames = pn.Name,
+                                 ProductName = pn.Name,
+
+                                 BrandName=b.Name,
+
+                                 UOMName =oum.Name + " " + oum.Unit,
 
                              }).OrderByDescending(x => x.CreateDate).ToListAsync();
 
@@ -145,9 +153,6 @@ namespace POS.Data.Services.StockModule
                 return null;
             }
         }
-
-
-
 
         public async Task<StockDTO> GetById(Guid Id)
         {
@@ -184,7 +189,18 @@ namespace POS.Data.Services.StockModule
         }
         public Task<StockDTO> Update(StockDTO stockDTO)
         {
-            throw new NotImplementedException();
+            try
+            {
+                throw new NotImplementedException();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+
+                return null;
+                
+            }
         }
     }
 }

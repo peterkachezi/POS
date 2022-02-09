@@ -1,7 +1,10 @@
-﻿@model IEnumerable<POS.Data.DTOs.StockModule.StockDTO>
+﻿
 @{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+
+
+<!-- Our Products Table -->
 <div class="col-md-12 col-sm-12 ">
     <div class="x_panel">
         <div class="x_title">
@@ -10,14 +13,14 @@
 
                 <div class="col-md-3">
 
-                    <h6 class="Header"><i class="fa fa-shopping-basket"></i> Products</h6>
+                    <h6 class="Header"><i class="fa fa-users"></i> Brands</h6>
                 </div>
                 <div class="col-md-9">
-                    <button type="button" class="btn btn-success btn-sm  pull-right" data-toggle="modal" data-target="#ModalCreateProduct"><i class="fa fa-plus-circle"></i> </button>
-
+                    <button type="button" class="btn btn-success btn-sm  pull-right" data-toggle="modal" data-target="#ModalCreateBrand" data-backdrop="static" data-keyboard="false"><i class="fa fa-plus-circle"></i>  </button>
                 </div>
 
             </div>
+
 
             <div class="clearfix"></div>
         </div>
@@ -26,59 +29,23 @@
                 <div class="col-sm-12">
                     <div class="card-box table-responsive">
 
-                        <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap table-sm" cellspacing="0" width="100%">
+
+                        <table id="tblRecords" class="table table-striped table-bordered dt-responsive nowrap table-sm" cellspacing="0" width="100%">
 
                             <thead>
-                                <tr>
-                                    <th>No</th>
-                                
-                                    <th>Product Code</th>
-                                    <th>Cost Price</th>
-                                    <th>Selling Price</th>
-                                    <th>Expected Profit</th>
-                            
+                                <tr>                                                                                             
 
-                                    <th>Create Date</th>
-                                    <th>Action</th>
+                                    <th scope="col">No</th>
+                                    <th scope="col">Product Code</th>
+                                    <th scope="col">Product Name</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Cost Price</th>
+                                    <th scope="col">Selling Price</th>                        
+                                    <th scope="col">Create Date</th>
+                                    <th scope="col">Action</th>
+
                                 </tr>
                             </thead>
-
-                            <tbody>
-
-                                @if (Model != null && Model.Count() > 0)
-                                {
-                                    int count = 1;
-                                    foreach (var item in Model)
-                                    {
-                                        <tr>
-                                            <td>@count</td>
-                         
-                                            <td>@item.ProductCode</td>
-                                            <td>@item.CostPrice</td>
-                                            <td>@item.SellingPrice</td>
-                                            <td>@item.ExpectedProfit</td>
-                                 
-
-
-                                            <td>@item.CreateDate.ToShortDateString()</td>
-                                            <td>
-                                                <div class="dropdown">
-                                                    <button class="btn btn-success dropdown-toggle  btn-sm" style="height: 1.5rem;" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        Active
-                                                    </button>
-                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                        <a class="dropdown-item" href="#" onclick="GetProduct('@item.Id')" value="@item.Id">Edit Information</a>
-                                                        <a class="dropdown-item" href="#" onclick="DeleteRecord('@item.Id')" value="@item.Id">Delete</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        count++;
-                                    }
-                                }
-
-                            </tbody>
-
                         </table>
 
                     </div>
@@ -88,6 +55,52 @@
     </div>
 </div>
 
+
+<div class="modal fade" id="ModalCreateBrand" tabindex="-1" role="dialog" aria-labelledby="ModalCreateBrandLabel" aria-hidden="true">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title Header" id="ModalCreateBrandLabel"> Add Brand</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form id="frmCreateBrand">
+
+
+                    <div class="">
+                        <label>Brand  Name</label>
+
+                        <input id="txtName" class="form-control" type="text" name="Name">
+
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" id="btnSubmit" class="btn btn-success">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="divLoader" style="display:none;" class="loader">
+
+    <img src="~/loaders/loading-23.gif" alt="Loader" style="width:20em;" />
+
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+<link href="~/sweetalart/sweetalert.min.css" rel="stylesheet" />
+
+<script src="~/sweetalart/sweetalert.min.js"></script>
 
 
 <style>
@@ -130,112 +143,81 @@
     }
 </style>
 
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>
-<link href="~/sweetalart/sweetalert.min.css" rel="stylesheet" />
-<script src="~/sweetalart/sweetalert.min.js"></script>
 
 <script>
-    $(document).ready(function () {
-        $('#dataTable').DataTable();
 
+    $(document).ready(function () {
+        GetAllData();
     });
 
 
-    $('#btnSubmit').click(function (evt) {
+    function GetAllData() {
 
-        if (!$('#txtProductNameId').val()) {
+        var t = $('#tblRecords').DataTable({
+            "ajax": {
+                "url": "/Admin/StockControl/GetStocks",
+                "type": "GET",
+                "datatype": "json"
+            },
 
-            $('#txtProductNameId').focus();
+            "columns": [
+
+                { "data": "id" },
+                { "data": "productCode" },
+                { "data": "fullProductName" },
+                { "data": "quantity" },
+                { "data": "costPrice" },
+                { "data": "sellingPrice" },
+                { "data": "newCreateDate" },
+
+
+                {
+                    data: null,
+
+                    mRender: function (data, type, row) {
+
+                        return "<a href='#' class='btn-sm success'    onclick=GetBrands('" + row.id + "'); >Update Stock</a>";
+
+                    }
+                }
+
+            ]
+
+        });
+        t.on('order.dt search.dt', function () {
+            t.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+                cell.innerHTML = i + 1;
+            });
+        }).draw();
+    }
+
+
+    $("#btnSubmit").click(function () {
+
+        if ($('#txtName').val() == '') {
+            $('#txtName').focus();
             swal({
                 position: 'top-end',
                 type: "error",
-                title: "Product Name is a required field",
+                title: "Name is a required field",
                 showConfirmButton: true,
             });
+
             return false;
         }
 
-        if (!$('#txtCostPrice').val()) {
-
-            $('#txtCostPrice').focus();
-            swal({
-                position: 'top-end',
-                type: "error",
-                title: "Cost Price is a required field",
-                showConfirmButton: true,
-            });
-            return false;
-        }
-
-        if (!$('#txtSellingPrice').val()) {
-
-            $('#txtSellingPrice').focus();
-            swal({
-                position: 'top-end',
-                type: "error",
-                title: "Selling Price is a required field",
-                showConfirmButton: true,
-            });
-            return false;
-        }
-
-        if (!$('#txtSupplierId').val()) {
-
-            $('#txtSupplierId').focus();
-            swal({
-                position: 'top-end',
-                type: "error",
-                title: "Supplier is a required field",
-                showConfirmButton: true,
-            });
-            return false;
-        }
-
-        if (!$('#txtBrandId').val()) {
-
-            $('#txtBrandId').focus();
-            swal({
-                position: 'top-end',
-                type: "error",
-                title: "Brand is a required field",
-                showConfirmButton: true,
-            });
-            return false;
-        }
-
-        if (!$('#txtUOMId').val()) {
-
-            $('#txtUOMId').focus();
-            swal({
-                position: 'top-end',
-                type: "error",
-                title: "Unit of Measure is a required field",
-                showConfirmButton: true,
-            });
-            return false;
-        }
-
-
-
-
-        $("#ModalCreateProduct").modal('hide');
+        $("#ModalCreateBrand").modal('hide');
 
         $("#divLoader").show();
-        // Stop the button from submitting the form:
-        evt.preventDefault();
-
-        // Serialize the entire form:
 
 
-        var formData = new FormData($('#frmCreateProduct').get(0));
-
+        var data = $("#frmCreateBrand").serialize();
 
         $.ajax({
-            url: "/Admin/Products/Create/",
+
             type: "POST",
-            data: formData,
-            processData: false,
-            contentType: false,
+            url: "/Admin/Brands/Create",
+            data: data,
 
             success: function (response) {
                 if (response.success) {
@@ -245,8 +227,9 @@
                         type: "success",
                         title: response.responseText,
                         showConfirmButton: false,
-                    }), setTimeout(function () { location.reload(); }, 3000);
 
+                    }), setTimeout(function () { location.reload(); }, 3000);
+                    $("#divLoader").hide();
                 } else {
 
                     swal({
@@ -257,110 +240,24 @@
                         timer: 5000,
                     });
 
-                    $("#divLoader").hide();
                 }
             },
 
             error: function (response) {
                 alert("error!");
-            },
-            complete: function () {
-                HideLoader();
+
             }
+        })
 
+    })
 
-        });
-
-    });
-
-    function DeleteRecord(e) {
+    function GetBrands(e) {
 
         var id = e;
 
         console.log(id);
 
-
-        swal(
-
-            {
-                title: "Are you sure?",
-
-                text: "Once deleted, you will not be able to recover this  file!",
-
-                type: "success",
-
-                showCancelButton: true,
-
-                confirmButtonColor: "##62b76e",
-
-                confirmButtonText: "Yes, Procceed!",
-
-                closeOnConfirm: false
-            },
-
-            function () {
-
-                $.ajax({
-
-                    type: "GET",
-
-                    url: "/Admin/Products/Delete/" + id,
-
-                    success: function (response) {
-
-                        if (response.success) {
-
-                            swal({
-
-                                position: 'top-end',
-
-                                type: "success",
-
-                                title: response.responseText,
-
-                                showConfirmButton: false,
-
-                                // timer: 2000,
-
-                            });
-                            setTimeout(function () { location.reload(); }, 3000);
-
-                        }
-
-                        else {
-                            swal({
-                                position: 'top-end',
-                                type: "error",
-                                title: response.responseText,
-                                showConfirmButton: true,
-                                timer: 5000,
-                            });
-
-                        }
-
-                    },
-                    error: function (response) {
-                        swal({
-                            position: 'top-end',
-                            type: "error",
-                            title: "Server error ,kindly contact the admin for assistance",
-                            showConfirmButton: false,
-                            timer: 5000,
-                        });
-
-                    }
-
-                })
-
-            }
-        );
-    }
-
-    function GetProduct(e) {
-        var id = e;
-        console.log(id);
-
-        $.get("/Admin/Products/GetById/?Id=" + id, function (data, status) {
+        $.get("/Admin/Stocks/GetById/?Id=" + id, function (data, status) {
 
             console.log(data);
 
@@ -369,17 +266,20 @@
             } else {
 
                 $("#txtId1").val(data.data.id);
+
                 $("#txtName1").val(data.data.name);
 
+                $("#txtUnit1").val(data.data.unit);
 
-
-
-                $('#ModalUpdateProduct').modal({ backdrop: 'static', keyboard: false })
-                $("#ModalUpdateProduct").modal('show');
+                $('#ModalCreateBrand').modal({ backdrop: 'static', keyboard: false })
+                $("#ModalCreateBrand").modal('show');
             }
 
         });
     };
+
+
+
 
     //Allow users to enter numbers only
     $(".numericOnly").bind('keypress', function (e) {
@@ -409,5 +309,5 @@
             $(this).val(val);
         }
     });
-</script>
 
+</script>
