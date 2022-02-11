@@ -25,7 +25,7 @@ namespace POS.Data.Models
         [StringLength(100)]
         public string TaxAmount { get; set; }
         public int? PaymentStatus { get; set; }
-        public virtual Product Product { get; set; }
-        public virtual Sale Sale { get; set; }
+        //public virtual Product Product { get; set; }
+        //public virtual Sale Sale { get; set; }
     }
 }

@@ -137,9 +137,9 @@ namespace POS.Data.Services.StockModule
 
                                  ProductName = pn.Name,
 
-                                 BrandName=b.Name,
+                                 BrandName = b.Name,
 
-                                 UOMName =oum.Name + " " + oum.Unit,
+                                 UOMName = oum.Name + " " + oum.Unit,
 
                              }).OrderByDescending(x => x.CreateDate).ToListAsync();
 
@@ -158,28 +158,57 @@ namespace POS.Data.Services.StockModule
         {
             try
             {
-                var stock = await context.Stocks.FindAsync(Id);
+                var stock = (from s in context.Stocks
 
-                return new StockDTO
-                {
-                    Id = stock.Id,
+                             join u in context.AppUsers on s.CreatedBy equals u.Id
 
-                    ProductId = stock.ProductId,
+                             join p in context.Products on s.ProductId equals p.Id
 
-                    ProductCode = stock.ProductCode,
+                             join pn in context.ProductNames on p.ProductNameId equals pn.Id
 
-                    Quantity = stock.Quantity,
+                             join b in context.Brands on p.BrandId equals b.Id
 
-                    CreateDate = stock.CreateDate,
+                             join oum in context.UOMs on p.UOMId equals oum.Id
 
-                    UpdatedDate = stock.UpdatedDate,
+                             where s.ProductId == Id
 
-                    CreatedBy = stock.CreatedBy,
+                             select new StockDTO
+                             {
+                                 Id = s.Id,
 
-                    UpdatedBy = stock.CreatedBy,
-                };
+                                 ProductId = s.ProductId,
+
+                                 ProductCode = s.ProductCode,
+
+                                 Quantity = s.Quantity,
+
+                                 CreateDate = s.CreateDate,
+
+                                 UpdatedDate = s.UpdatedDate,
+
+                                 CreatedBy = s.CreatedBy,
+
+                                 CreatedByName = u.FirstName + " " + u.LastName,
+
+                                 UpdatedBy = s.CreatedBy,
+
+                                 SellingPrice = p.SellingPrice,
+
+                                 CostPrice = p.CostPrice,
+
+                                 ExpectedProfit = p.ExpectedProfit,
+
+                                 ProductName = pn.Name,
+
+                                 BrandName = b.Name,
+
+                                 UOMName = oum.Name + " " + oum.Unit,
+
+                             }).FirstOrDefaultAsync();
+
+                return await stock;
+
             }
-
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
@@ -199,7 +228,7 @@ namespace POS.Data.Services.StockModule
                 Console.WriteLine(ex.Message);
 
                 return null;
-                
+
             }
         }
     }

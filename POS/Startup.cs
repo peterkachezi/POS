@@ -11,6 +11,7 @@ using POS.Data.Services.BrandModule;
 using POS.Data.Services.CountyModule;
 using POS.Data.Services.CustomerModule;
 using POS.Data.Services.ProductModule;
+using POS.Data.Services.SalesModule;
 using POS.Data.Services.SMSModule;
 using POS.Data.Services.StockModule;
 using POS.Data.Services.SupplerModule;
@@ -61,6 +62,8 @@ namespace POS
             services.AddScoped<IMailService, MailService>();
 
             services.AddScoped<IMessagingService, MessagingService>();
+
+            services.AddScoped<ISalesService, SalesService>();
             
         }
 

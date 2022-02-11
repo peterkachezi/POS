@@ -7,10 +7,6 @@ namespace POS.Data.Models
 {
     public partial class Sale
     {
-        public Sale()
-        {
-            SalesDetails = new HashSet<SalesDetail>();
-        }
 
         public Guid Id { get; set; }
 
@@ -31,7 +27,7 @@ namespace POS.Data.Models
 
         public decimal CashPaid { get; set; }           
 
-        public virtual Customer Customer { get; set; }
-        public virtual ICollection<SalesDetail> SalesDetails { get; set; }
+        //public virtual Customer Customer { get; set; }
+        //public virtual ICollection<SalesDetail> SalesDetails { get; set; }
     }
 }

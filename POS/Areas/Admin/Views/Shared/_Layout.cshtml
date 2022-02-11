@@ -50,7 +50,7 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="/Administrator/dashboard" class="site_title"><i class="fa fa-building"></i> <span>Skisoft Store</span></a>
+                        <a href="/Admin/dashboard" class="site_title"><i class="fa fa-building"></i> <span>Skisoft Store</span></a>
                     </div>
 
                     <div class="clearfix"></div>
@@ -113,90 +113,85 @@
                                 <li>
                                     <a><i class="fa fa-money"></i> Purchases <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="~/Administrator/Sale/DirectSales/">Direct Sale</a></li>
-                                        <li><a href="~/Administrator/Sale/">Corporate Sale</a></li>
-                                        <li><a href="~/Administrator/Sale/CustomerOrders/">Customer Orders</a></li>
-                                        <li><a href="~/Administrator/Sale/SalesDetails/">Sales</a></li>
-                                        @*<li><a href="~/Administrator/Orders/">Quick Find Orders</a></li>*@
-                                        <li><a href="~/Administrator/Payments">Mpesa Payments</a></li>
-                                        <li><a href="~/Administrator/Payments/TestStk">STK Push</a></li>
-                                        <li><a href="~/Administrator/Payments/ValidatePayment">Validate Payment</a></li>
-
-                                        @*<li><a href="~/Administrator/Credit/">Vendor</a></li>
-                <li><a href="~/Administrator/Credit/">Purchase Type</a></li>
-                <li><a href="~/Administrator/Credit/">Purchase Order</a></li>
-                <li><a href="~/Administrator/Credit/">Goods Received Note</a></li>
-                <li><a href="~/Administrator/Credit/">Bill</a></li>
-                <li><a href="~/Administrator/Credit/">Payment Voucher</a></li>*@
-
+                                        <li><a href="~/Admin/Sales/DirectSales/">POS</a></li>                                      
+                                        @*<li><a href="~/Admin/Sales/CustomerOrders/">Customer Orders</a></li>*@
                                     </ul>
                                 </li>
 
 
+                                <li>
+                                    <a><i class="fa fa-money"></i> Sales <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                    
+                                        <li><a href="~/Admin/Sales/SalesDetails/">Sales</a></li>
+                                        <li><a href="~/Admin/Sales/SalesDetails/">Individual Sales</a></li>
+                 
+                                    </ul>
+                                </li>
 
                                 <li>
                                     <a><i class="fa fa-home"></i> Receipts <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="~/Administrator/POS/">Re-Generate Receipts</a></li>
-                                        <li><a href="~/Administrator/Credit/">Manage Invoices</a></li>
+                                        <li><a href="~/Admin/POS/">Re-Generate Receipts</a></li>
+                                        <li><a href="~/Admin/Credit/">Manage Invoices</a></li>
 
                                     </ul>
                                 </li>
 
                                 @*<li>
-            <a><i class="fa fa-home"></i> Sales <span class="fa fa-chevron-down"></span></a>
-            <ul class="nav child_menu">
-                <li><a href="~/Administrator/POS/">Customer Type</a></li>
-                <li><a href="~/Administrator/Credit/">Customer</a></li>
-                <li><a href="~/Administrator/POS/">Sales Type</a></li>
-                <li><a href="~/Administrator/Credit/">Sales Order</a></li>
-                <li><a href="~/Administrator/POS/">Shipment</a></li>
-                <li><a href="~/Administrator/Credit/">Invoice</a></li>
-                <li><a href="~/Administrator/Credit/">Payment Receive</a></li>
-                                                    </ul>
-        </li>
+                                        <a><i class="fa fa-home"></i> Sales <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="~/Admin/POS/">Customer Type</a></li>
+                                            <li><a href="~/Admin/Credit/">Customer</a></li>
+                                            <li><a href="~/Admin/POS/">Sales Type</a></li>
+                                            <li><a href="~/Admin/Credit/">Sales Order</a></li>
+                                            <li><a href="~/Admin/POS/">Shipment</a></li>
+                                            <li><a href="~/Admin/Credit/">Invoice</a></li>
+                                            <li><a href="~/Admin/Credit/">Payment Receive</a></li>
+                                                                                </ul>
+                                    </li>
 
 
-        <li>
-            <a><i class="fa fa-home"></i> Purchase <span class="fa fa-chevron-down"></span></a>
-            <ul class="nav child_menu">
-                <li><a href="~/Administrator/POS/">Vendor Type</a></li>
-                <li><a href="~/Administrator/Credit/">Vendor</a></li>
-                <li><a href="~/Administrator/Credit/">Purchase Type</a></li>
-                <li><a href="~/Administrator/Credit/">Purchase Order</a></li>
-                <li><a href="~/Administrator/Credit/">Goods Received Note</a></li>
-                <li><a href="~/Administrator/Credit/">Bill</a></li>
-                <li><a href="~/Administrator/Credit/">Payment Voucher</a></li>
+                                    <li>
+                                        <a><i class="fa fa-home"></i> Purchase <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="~/Admin/POS/">Vendor Type</a></li>
+                                            <li><a href="~/Admin/Credit/">Vendor</a></li>
+                                            <li><a href="~/Admin/Credit/">Purchase Type</a></li>
+                                            <li><a href="~/Admin/Credit/">Purchase Order</a></li>
+                                            <li><a href="~/Admin/Credit/">Goods Received Note</a></li>
+                                            <li><a href="~/Admin/Credit/">Bill</a></li>
+                                            <li><a href="~/Admin/Credit/">Payment Voucher</a></li>
 
-            </ul>
-        </li>*@
+                                        </ul>
+                                    </li>*@
 
                                 <!--<li>
-        <a><i class="fa fa-home"></i> Inventory <span class="fa fa-chevron-down"></span></a>
-        <ul class="nav child_menu">
-            <li><a href="~/Administrator/POS/">Product</a></li>
-            <li><a href="~/Administrator/Credit/">Vendor</a></li>
-            <li><a href="~/Administrator/Credit/">Product Type</a></li>
-            <li><a href="~/Administrator/Credit/">Unit of Measure</a></li>
+                                    <a><i class="fa fa-home"></i> Inventory <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="~/Admin/POS/">Product</a></li>
+                                        <li><a href="~/Admin/Credit/">Vendor</a></li>
+                                        <li><a href="~/Admin/Credit/">Product Type</a></li>
+                                        <li><a href="~/Admin/Credit/">Unit of Measure</a></li>
 
 
-        </ul>
-    </li>
-
-
-
+                                    </ul>
+                                </li>
 
 
 
-    <li>
-        <a><i class="fa fa-home"></i> Transactions <span class="fa fa-chevron-down"></span></a>
-        <ul class="nav child_menu">
-            <li><a href="~/Administrator/Sales/">Sales</a></li>
-            <li><a href="~/Administrator/Orders/">Orders</a></li>
-            <li><a href="~/Administrator/SalesPaginated/">Sales Paginated</a></li>-->
+
+
+
+                                <li>
+                                    <a><i class="fa fa-home"></i> Transactions <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="~/Admin/Sales/">Sales</a></li>
+                                        <li><a href="~/Admin/Orders/">Orders</a></li>
+                                        <li><a href="~/Admin/SalesPaginated/">Sales Paginated</a></li>-->
                                 @*<li><a href="#">Sales</a></li>*@
                                 <!--</ul>
-    </li>-->
+                                </li>-->
 
                                 <li>
                                     <a><i class="fa fa-shopping-basket"></i> Suppliers <span class="fa fa-chevron-down"></span></a>
@@ -250,9 +245,9 @@
                                 <li>
                                     <a><i class="fa fa-product-hunt"></i>Inventory<span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="~/Administrator/AssetsManager/Furnitures">Furnitures</a></li>
-                                        <li><a href="~/Administrator/AssetsManager/Electronics">Electronics</a></li>
-                                        <li><a href="~/Administrator/AssetsManager/Vehicles">Vehicles</a></li>
+                                        <li><a href="~/Admin/AssetsManager/Furnitures">Furnitures</a></li>
+                                        <li><a href="~/Admin/AssetsManager/Electronics">Electronics</a></li>
+                                        <li><a href="~/Admin/AssetsManager/Vehicles">Vehicles</a></li>
 
                                     </ul>
                                 </li>
@@ -260,10 +255,10 @@
                                 <li>
                                     <a><i class="fa fa-share"></i>Accounts<span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="~/Administrator/ExpenseTypes/">Expense Types</a></li>
-                                        <li><a href="~/Administrator/Expenses/">Expenses</a></li>
-                                        <li><a href="~/Administrator/POS/">Re-Generate Receipts</a></li>
-                                        <li><a href="~/Administrator/Credit/">Manage Invoices</a></li>
+                                        <li><a href="~/Admin/ExpenseTypes/">Expense Types</a></li>
+                                        <li><a href="~/Admin/Expenses/">Expenses</a></li>
+                                        <li><a href="~/Admin/POS/">Re-Generate Receipts</a></li>
+                                        <li><a href="~/Admin/Credit/">Manage Invoices</a></li>
 
                                     </ul>
                                 </li>
@@ -282,51 +277,51 @@
                                     <ul class="nav child_menu">
 
                                         <li><a href="#">Payment Settings</a></li>
-                                        <li><a href="~/Administrator/UserManagement/">Manage Users</a></li>
+                                        <li><a href="~/Admin/UserManagement/">Manage Users</a></li>
 
-                                        @*<li><a href="~/Administrator/Role/">Users Roles</a></li>
-                <li><a href="~/Administrator/Branch/">System Access Audit Trail</a></li>
-                <li><a href="~/Administrator/Branch/">Manage Taxes</a></li>
-                <li><a href="~/Administrator/Branch/">View Profile</a></li>
-                <li><a href="~/Administrator/Company/">Company Profile</a></li>
+                                        @*<li><a href="~/Admin/Role/">Users Roles</a></li>
+                                            <li><a href="~/Admin/Branch/">System Access Audit Trail</a></li>
+                                            <li><a href="~/Admin/Branch/">Manage Taxes</a></li>
+                                            <li><a href="~/Admin/Branch/">View Profile</a></li>
+                                            <li><a href="~/Admin/Company/">Company Profile</a></li>
 
-                <li><a href="~/Administrator/Company/">Currency</a></li>
-                <li><a href="~/Administrator/Company/">Branch</a></li>
-                <li><a href="~/Administrator/Company/">Warehouse</a></li>
-                <li><a href="~/Administrator/Company/">Cash Bank</a></li>
-                <li><a href="~/Administrator/Company/">Payment Type</a></li>
-                <li><a href="~/Administrator/Company/">Shipment Type</a></li>
-                <li><a href="~/Administrator/Company/">Invoice Type</a></li>
-                <li><a href="~/Administrator/Company/">Bill Type</a></li>*@
+                                            <li><a href="~/Admin/Company/">Currency</a></li>
+                                            <li><a href="~/Admin/Company/">Branch</a></li>
+                                            <li><a href="~/Admin/Company/">Warehouse</a></li>
+                                            <li><a href="~/Admin/Company/">Cash Bank</a></li>
+                                            <li><a href="~/Admin/Company/">Payment Type</a></li>
+                                            <li><a href="~/Admin/Company/">Shipment Type</a></li>
+                                            <li><a href="~/Admin/Company/">Invoice Type</a></li>
+                                            <li><a href="~/Admin/Company/">Bill Type</a></li>*@
 
                                     </ul>
                                 </li>
                                 @*<li>
-            <a><i class="fa fa-clone"></i>Returns<span class="fa fa-chevron-down"></span></a>
-            <ul class="nav child_menu">
-                <li><a href="~/Administrator/Returns/TransactionDetails/">Return-To-Vendor(RTV)</a></li>
+                                        <a><i class="fa fa-clone"></i>Returns<span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="~/Admin/Returns/TransactionDetails/">Return-To-Vendor(RTV)</a></li>
 
-            </ul>
-        </li>
+                                        </ul>
+                                    </li>
 
 
 
-        <li>
-            <a><i class="fa fa-table"></i> Manage Suppliers <span class="fa fa-chevron-down"></span></a>
-            <ul class="nav child_menu">
-                <li><a href="~/Administrator/SuppliersManagement/">Suppliers</a></li>
+                                    <li>
+                                        <a><i class="fa fa-table"></i> Manage Suppliers <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="~/Admin/SuppliersManagement/">Suppliers</a></li>
 
-            </ul>
-        </li>
+                                        </ul>
+                                    </li>
 
-        <li>
-            <a><i class="fa fa-bar-chart-o"></i>Accounts<span class="fa fa-chevron-down"></span></a>
-            <ul class="nav child_menu">
-                <li><a href="#">Invoices</a></li>
-                <li><a href="~/Administrator/ExpenseType/">Expense Types</a></li>
-                <li><a href="~/Administrator/Expense/">Expenses</a></li>
-            </ul>
-        </li>*@
+                                    <li>
+                                        <a><i class="fa fa-bar-chart-o"></i>Accounts<span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="#">Invoices</a></li>
+                                            <li><a href="~/Admin/ExpenseType/">Expense Types</a></li>
+                                            <li><a href="~/Admin/Expense/">Expenses</a></li>
+                                        </ul>
+                                    </li>*@
 
                             </ul>
                         </div>
@@ -338,22 +333,22 @@
                                 <a><i class="fa fa-bug"></i> Settings & Configuration <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
 
-                                    <li><a href="~/Administrator/Branch/">Branches</a></li>
-                                    <li><a href="~/Administrator/UserManagement/">Manage Users</a></li>
-                                    <li><a href="~/Administrator/Role/">Users Roles</a></li>
-                                    <li><a href="~/Administrator/Branch/">System Access Audit Trail</a></li>
-                                    <li><a href="~/Administrator/Branch/">Manage Taxes</a></li>
-                                    <li><a href="~/Administrator/Branch/">View Profile</a></li>
-                                    <li><a href="~/Administrator/Company/">Company Profile</a></li>
+                                    <li><a href="~/Admin/Branch/">Branches</a></li>
+                                    <li><a href="~/Admin/UserManagement/">Manage Users</a></li>
+                                    <li><a href="~/Admin/Role/">Users Roles</a></li>
+                                    <li><a href="~/Admin/Branch/">System Access Audit Trail</a></li>
+                                    <li><a href="~/Admin/Branch/">Manage Taxes</a></li>
+                                    <li><a href="~/Admin/Branch/">View Profile</a></li>
+                                    <li><a href="~/Admin/Company/">Company Profile</a></li>
 
-                                    <li><a href="~/Administrator/Company/">Currency</a></li>
-                                    <li><a href="~/Administrator/Company/">Branch</a></li>
-                                    <li><a href="~/Administrator/Company/">Warehouse</a></li>
-                                    <li><a href="~/Administrator/Company/">Cash Bank</a></li>
-                                    <li><a href="~/Administrator/Company/">Payment Type</a></li>
-                                    <li><a href="~/Administrator/Company/">Shipment Type</a></li>
-                                    <li><a href="~/Administrator/Company/">Invoice Type</a></li>
-                                    <li><a href="~/Administrator/Company/">Bill Type</a></li>
+                                    <li><a href="~/Admin/Company/">Currency</a></li>
+                                    <li><a href="~/Admin/Company/">Branch</a></li>
+                                    <li><a href="~/Admin/Company/">Warehouse</a></li>
+                                    <li><a href="~/Admin/Company/">Cash Bank</a></li>
+                                    <li><a href="~/Admin/Company/">Payment Type</a></li>
+                                    <li><a href="~/Admin/Company/">Shipment Type</a></li>
+                                    <li><a href="~/Admin/Company/">Invoice Type</a></li>
+                                    <li><a href="~/Admin/Company/">Bill Type</a></li>
 
                                 </ul>
                             </li>*@
@@ -383,7 +378,7 @@
                             <a><i class="fa fa-sitemap"></i>Reports <span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
                                 <li>
-                                    <a href="~/Administrator/Report/Index">Sales</a>-->
+                                    <a href="~/Admin/Report/Index">Sales</a>-->
                         <!--@*<li><a href="#">Products</a>
                           <li><a href="#">Suppliers</a>
                           <li>

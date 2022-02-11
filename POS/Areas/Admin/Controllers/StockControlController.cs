@@ -23,7 +23,7 @@ namespace POS.Areas.Admin.Controllers
         private readonly ISupplierService supplierService;
 
         private readonly UserManager<AppUser> userManager;
-        public StockControlController(IProductService productService,ISupplierService supplierService, UserManager<AppUser> userManager, IStockService stockService)
+        public StockControlController(IProductService productService, ISupplierService supplierService, UserManager<AppUser> userManager, IStockService stockService)
         {
             this.stockService = stockService;
 
@@ -56,10 +56,10 @@ namespace POS.Areas.Admin.Controllers
 
             return Json(new { data = stock });
         }
-        
+
         public IActionResult StockEntry()
         {
-           
+
             return View();
         }
 
@@ -115,7 +115,12 @@ namespace POS.Areas.Admin.Controllers
             }
 
         }
-            
+
+        public IActionResult Test()
+        {
+            return View();
+        }
+
 
         public async Task<IActionResult> GetById(Guid Id)
         {
@@ -129,10 +134,33 @@ namespace POS.Areas.Admin.Controllers
                     {
                         Id = data.Id,
 
+                        ProductId = data.ProductId,
+
+                        ProductCode = data.ProductCode,
+
+                        Quantity = data.Quantity,
 
                         CreateDate = data.CreateDate,
 
-                        CreatedBy = data.CreatedBy
+                        UpdatedDate = data.UpdatedDate,
+
+                        CreatedBy = data.CreatedBy,
+
+                        CreatedByName = data.CreatedByName,
+
+                        UpdatedBy = data.CreatedBy,
+
+                        SellingPrice = data.SellingPrice,
+
+                        CostPrice = data.CostPrice,
+
+                        ExpectedProfit = data.ExpectedProfit,
+
+                        ProductName = data.ProductName,
+
+                        BrandName = data.BrandName,
+
+                        UOMName = data.UOMName,
                     };
 
                     return Json(new { data = file });
