@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32002.261
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POS", "POS\POS.csproj", "{5D37CC3A-C229-46BB-A686-42385C5FBCCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "POS", "POS\POS.csproj", "{5D37CC3A-C229-46BB-A686-42385C5FBCCB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POS.Data", "POS.Data\POS.Data.csproj", "{D42D500D-207F-4F33-8FA6-05EC55F60E15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "POS.Data", "POS.Data\POS.Data.csproj", "{D42D500D-207F-4F33-8FA6-05EC55F60E15}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POS.Report", "POS.Report\POS.Report.csproj", "{2DAB26A8-D58E-4966-8704-CDAA7F6BDD56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{D42D500D-207F-4F33-8FA6-05EC55F60E15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D42D500D-207F-4F33-8FA6-05EC55F60E15}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D42D500D-207F-4F33-8FA6-05EC55F60E15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DAB26A8-D58E-4966-8704-CDAA7F6BDD56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DAB26A8-D58E-4966-8704-CDAA7F6BDD56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DAB26A8-D58E-4966-8704-CDAA7F6BDD56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DAB26A8-D58E-4966-8704-CDAA7F6BDD56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -130,13 +130,15 @@ namespace POS.Data.Services.SalesModule
         {
             var salesdetails = (from sd in context.SalesDetails
 
-                                join p in context.Products on sd.ProductId equals p.Id
+                                join u in context.AppUsers on sd.CreatedBy equals u.Id
 
-                                join pn in context.ProductNames on p.ProductNameId equals pn.Id
+                                //join p in context.Products on sd.ProductId equals p.Id
 
-                                join b in context.Brands on p.BrandId equals b.Id
+                                //join pn in context.ProductNames on p.ProductNameId equals pn.Id
 
-                                join uom in context.UOMs on p.UOMId equals uom.Id
+                                //join b in context.Brands on p.BrandId equals b.Id
+
+                                //join uom in context.UOMs on p.UOMId equals uom.Id
 
                                 select new SalesDetailsDTO
                                 {
@@ -165,7 +167,9 @@ namespace POS.Data.Services.SalesModule
 
                                     PaymentStatus = sd.PaymentStatus,
 
-                                    ProductName=b.Name +" " + pn.Name +" " + uom.Name +" " + uom.Unit
+                                    CreateByName = u.FirstName + " " + u.LastName,
+
+                                    //ProductName=b.Name +" " + pn.Name +" " + uom.Name +" " + uom.Unit
 
                                 }).OrderByDescending(x => x.CreateDate).ToListAsync();
 
