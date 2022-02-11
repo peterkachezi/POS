@@ -13,10 +13,10 @@
 
                 <div class="col-md-3">
 
-                    <h6 class="Header"><i class="fa fa-users"></i> Customer(s)</h6>
+                    <h6 class="title"><i class="fa fa-users"></i> Customers</h6>
                 </div>
                 <div class="col-md-9">
-                    <button type="button" class="btn btn-success btn-sm  pull-right" data-toggle="modal" data-target="#AddCustomerModal"><i class="fa fa-plus-circle"></i> Add Customer</button>
+                    <button type="button" class="btn btn-success btn-sm  pull-right" data-toggle="modal" data-target="#AddCustomerModal"><i class="fa fa-plus-circle"></i> </button>
                 </div>
 
             </div>
@@ -30,18 +30,17 @@
                     <div class="card-box table-responsive">
 
 
-                        <table id="tblCustomer" class="table table-striped table-bordered dt-responsive nowrap table-sm" cellspacing="0" width="100%">
+                        <table id="tblCustomers" class="table table-striped table-bordered dt-responsive nowrap table-sm" cellspacing="0" width="100%">
 
                             <thead>
                                 <tr>
 
                                     <th scope="col">No</th>
-                                    <th scope="col">First Name</th>
-                                    <th scope="col">Middle Name</th>
-                                    <th scope="col">Last Name</th>
+                                    <th scope="col">Customer Number</th>                         
+                                    <th scope="col"> Name</th>
                                     <th scope="col">Phone Number</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">CustomerNumber</th>
+                                    <th scope="col">Email</th>       
+                                    <th scope="col">Entry Date</th>
                                     <th scope="col">Created by</th>
                                     <th scope="col">Action</th>
 
@@ -60,7 +59,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title Title" id="AddCustomerModalLabel">Create Customer</h5>
+                <h5 class="modal-title header" id="AddCustomerModalLabel">Create Customers</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -125,7 +124,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title Title" id="UpdateCustomerModalLabel">Update Customer Information</h5>
+                <h5 class="modal-title title" id="UpdateCustomerModalLabel">Update Customers Information</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -134,7 +133,7 @@
 
                 <form class="form-group" id="frmUpdateCustomer">
 
-                    <input type="text" name="Id" Id="txtId" class="form-control" />
+                    <input type="hidden" name="Id" Id="txtId" class="form-control" />
 
                     <div class="row">
 
@@ -191,13 +190,13 @@
 
 <div id="divLoader" style="display:none;" class="loader">
 
-    <img src="~/Content/loaders/loading-23.gif" alt="Loader" style="width:20em;" />
+    <img src="~/loaders/loading-23.gif" alt="Loader" style="width:20em;" />
 
 </div>
 
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-<link href="~/Content/sweetalart/sweetalert.min.css" rel="stylesheet" />
-<script src="~/Content/sweetalart/sweetalert.min.js"></script>
+<link href="~/sweetalart/sweetalert.min.css" rel="stylesheet" />
+<script src="~/sweetalart/sweetalert.min.js"></script>
 
 
 <style>
@@ -226,11 +225,19 @@
         z-index: 1000;
     }
 
-    .Title {
+    .header {
         font-weight: 600;
         color: #45ca9f;
         font-size: 1.5rem;
-        line-height: 70px;
+
+        max-width: calc(100% - 40px);
+    }
+
+    .title {
+        font-weight: 600;
+        color: #45ca9f;
+        font-size: 1.5rem;
+      
         max-width: calc(100% - 40px);
     }
 </style>
@@ -239,11 +246,50 @@
 
 
 <script>
-
     $(document).ready(function () {
-  
+
+        GetAllData();
+
     });
 
+
+    function GetAllData() {
+
+
+        var t = $('#tblCustomers').DataTable({
+            "ajax": {
+                "url": "/Admin/Customers/GetCustomers",
+                "type": "GET",
+                "datatype": "json"
+            },
+
+            "columns": [
+
+                { "data": "id" },
+                { "data": "customerNumber" },
+                { "data": "fullName" },
+                { "data": "phoneNumber" },
+                { "data": "email" },
+                { "data": "createdByName" },
+                { "data": "newCreateDate" },
+
+                {
+                    data: null,
+                    mRender: function (data, type, row) {
+                        return "<a href='#' class='btn-sm success'    onclick=GetCustomer('" + row.id + "'); >Edit</a> / <a href='#' class='btn-sm danger'    onclick=DeleteRecord('" + row.id + "'); >Delete</a>";
+
+                    }
+                }
+
+            ]
+
+        });
+        t.on('order.dt search.dt', function () {
+            t.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+                cell.innerHTML = i + 1;
+            });
+        }).draw();
+    }
 
 
     $("#btnSubmit").click(function () {
@@ -317,7 +363,7 @@
 
         $.ajax({
             type: "POST",
-            url: "/Admin/Customer/Create", // NB: Use the correct action name
+            url: "/Admin/Customers/Create", // NB: Use the correct action name
             data: formData,
             dataType: 'json',
             contentType: false,
@@ -426,7 +472,7 @@
 
         $.ajax({
             type: "POST",
-            url: "/Admin/Customer/Update", // NB: Use the correct action name
+            url: "/Admin/Customers/Update", // NB: Use the correct action name
             data: formData,
             dataType: 'json',
             contentType: false,
@@ -496,7 +542,7 @@
 
                     type: "GET",
 
-                    url: "/Admin/Customer/Delete/" + id,
+                    url: "/Admin/Customers/Delete/" + id,
 
                     success: function (response) {
 
@@ -555,18 +601,18 @@
         var id = e;
         console.log(id);
 
-        $.get("/Admin/Customer/GetById/?Id=" + id, function (data, status) {
+        $.get("/Admin/Customers/GetById/?Id=" + id, function (data, status) {
             console.log(data);
             if (data == null) {
                 alert("Does not exist");
             } else {
 
-                $("#txtId").val(data.data.Id);
-                $("#txtEmail1").val(data.data.Email);
-                $("#txtFirstName1").val(data.data.FirstName);
-                $("#txtMiddleName1").val(data.data.MiddleName);
-                $("#txtLastName1").val(data.data.LastName);
-                $("#txtPhoneNumber1").val(data.data.PhoneNumber);
+                $("#txtId").val(data.data.id);
+                $("#txtEmail1").val(data.data.email);
+                $("#txtFirstName1").val(data.data.firstName);
+                $("#txtMiddleName1").val(data.data.middleName);
+                $("#txtLastName1").val(data.data.lastName);
+                $("#txtPhoneNumber1").val(data.data.phoneNumber);
 
                 $('#UpdateCustomerModal').modal({ backdrop: 'static', keyboard: false })
                 $("#UpdateCustomerModal").modal('show');

@@ -12,27 +12,28 @@ namespace POS.Data.Models
         {
 
         }
-        public virtual DbSet<ProductName>  ProductNames { get; set; }
+        public virtual DbSet<ProductName> ProductNames { get; set; }
         public virtual DbSet<AppUser> AppUsers { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<CustomerOrder> CustomerOrders { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Sale> Sales { get; set; }
         public virtual DbSet<SalesDetail> SalesDetails { get; set; }
-        public virtual DbSet<County>  Counties  { get; set; }
+        public virtual DbSet<County> Counties { get; set; }
         public virtual DbSet<Invoice> Invoices { get; set; }
-        public virtual DbSet<MpesaExpressRespons>  MpesaExpressResponses { get; set; }
-        public virtual DbSet<UOM>  UOMs { get; set; }
+        public virtual DbSet<MpesaExpressRespons> MpesaExpressResponses { get; set; }
+        public virtual DbSet<UOM> UOMs { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
-        public virtual DbSet<Brand>  Brands { get; set; }
-        public virtual DbSet<Stock>   Stocks { get; set; }
+        public virtual DbSet<Brand> Brands { get; set; }
+        public virtual DbSet<Stock> Stocks { get; set; }
+        public virtual DbSet<CyberService> CyberServices { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Brand>(entity =>
-            {     
+            {
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Id).HasDefaultValueSql("NEWID()");
             });

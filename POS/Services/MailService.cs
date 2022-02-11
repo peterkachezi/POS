@@ -55,7 +55,7 @@ namespace POS.Services
                     mailMessage.To.Add(to);
 
 
-                mailMessage.Subject = "Healthier Kenya: ";
+                mailMessage.Subject = "Skisoft Systems: ";
 
                 var templatePath = env.WebRootPath
                            + Path.DirectorySeparatorChar.ToString()
@@ -79,6 +79,7 @@ namespace POS.Services
                 mailMessage.Body = string.Format(builder.HtmlBody,
 
                      customerDTO.FirstName,
+
                      customerDTO.CustomerNumber
 
                     );
