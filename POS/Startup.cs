@@ -9,11 +9,14 @@ using Microsoft.Extensions.Hosting;
 using POS.Data.Models;
 using POS.Data.Services.BrandModule;
 using POS.Data.Services.CountyModule;
+using POS.Data.Services.CustomerModule;
 using POS.Data.Services.ProductModule;
+using POS.Data.Services.SMSModule;
 using POS.Data.Services.StockModule;
 using POS.Data.Services.SupplerModule;
 using POS.Data.Services.UnitOfMeasureModule;
 using POS.Extensions;
+using POS.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,6 +55,12 @@ namespace POS
             services.AddScoped<IProductService, ProductService>();
 
             services.AddScoped<IStockService, StockService>();
+
+            services.AddScoped<ICustomersService, CustomersService>();
+
+            services.AddScoped<IMailService, MailService>();
+
+            services.AddScoped<IMessagingService, MessagingService>();
             
         }
 
@@ -68,9 +77,9 @@ namespace POS
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            CreateRoles(roleManager);
+            //CreateRoles(roleManager);
 
-            CreateUsers(userManager);
+            //CreateUsers(userManager);
 
             app.UseHttpsRedirection();
 
