@@ -10,8 +10,8 @@ using POS.Data.Models;
 namespace POS.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220211124425_foreugn")]
-    partial class foreugn
+    [Migration("20220510140522_1")]
+    partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

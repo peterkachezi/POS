@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace POS.Data.Migrations
 {
-    public partial class uo45 : Migration
+    public partial class _1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -100,6 +100,21 @@ namespace POS.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CyberServices",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Amount = table.Column<decimal>(nullable: false),
+                    CreateDate = table.Column<DateTime>(nullable: false),
+                    CreatedBy = table.Column<string>(maxLength: 128, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CyberServices", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Invoices",
                 columns: table => new
                 {
@@ -128,6 +143,84 @@ namespace POS.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MpesaExpressResponses", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductNames",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    CreateDate = table.Column<DateTime>(nullable: false),
+                    CreatedBy = table.Column<string>(maxLength: 128, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductNames", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false, defaultValueSql: "NEWID()"),
+                    ProductNameId = table.Column<Guid>(maxLength: 100, nullable: false),
+                    CostPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    SellingPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ExpectedProfit = table.Column<decimal>(nullable: false),
+                    ProductCode = table.Column<string>(nullable: true),
+                    CreateDate = table.Column<DateTime>(nullable: false),
+                    CreatedBy = table.Column<string>(maxLength: 128, nullable: false),
+                    UpdateBy = table.Column<string>(maxLength: 128, nullable: false),
+                    UpdatedDate = table.Column<DateTime>(nullable: false),
+                    Status = table.Column<byte>(nullable: false),
+                    SupplierId = table.Column<Guid>(nullable: false),
+                    BrandId = table.Column<Guid>(nullable: false),
+                    UOMId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SalesDetails",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false, defaultValueSql: "NEWID()"),
+                    OrderId = table.Column<Guid>(nullable: false),
+                    ProductId = table.Column<Guid>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false),
+                    SellingPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Discount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    OrderNumber = table.Column<string>(nullable: false),
+                    CreateDate = table.Column<DateTime>(nullable: false),
+                    CreatedBy = table.Column<string>(maxLength: 128, nullable: false),
+                    TaxAmount = table.Column<string>(maxLength: 100, nullable: true),
+                    PaymentStatus = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SalesDetails", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Stocks",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    ProductId = table.Column<Guid>(nullable: false),
+                    ProductCode = table.Column<string>(nullable: true),
+                    Quantity = table.Column<int>(nullable: false),
+                    CreateDate = table.Column<DateTime>(nullable: false),
+                    UpdatedDate = table.Column<DateTime>(nullable: false),
+                    CreatedBy = table.Column<string>(maxLength: 128, nullable: false),
+                    UpdatedBy = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Stocks", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -297,33 +390,6 @@ namespace POS.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Products",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false, defaultValueSql: "NEWID()"),
-                    Name = table.Column<string>(maxLength: 100, nullable: false),
-                    ProductCode = table.Column<string>(nullable: false),
-                    CreateDate = table.Column<DateTime>(nullable: false),
-                    CreatedBy = table.Column<string>(maxLength: 128, nullable: false),
-                    UpdateBy = table.Column<string>(maxLength: 128, nullable: false),
-                    UpdatedDate = table.Column<DateTime>(nullable: false),
-                    Status = table.Column<bool>(nullable: false),
-                    SupplierId = table.Column<Guid>(nullable: false),
-                    BrandId = table.Column<Guid>(nullable: false),
-                    UOMId = table.Column<Guid>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Products", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Products_UOMs_UOMId",
-                        column: x => x.UOMId,
-                        principalTable: "UOMs",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "CustomerOrders",
                 columns: table => new
                 {
@@ -350,41 +416,6 @@ namespace POS.Data.Migrations
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SalesDetails",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false, defaultValueSql: "NEWID()"),
-                    OrderId = table.Column<Guid>(nullable: false),
-                    ProductId = table.Column<Guid>(nullable: false),
-                    Quantity = table.Column<int>(nullable: false),
-                    SellingPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Discount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    OrderNumber = table.Column<string>(nullable: false),
-                    CreateDate = table.Column<DateTime>(nullable: false),
-                    CreatedBy = table.Column<string>(maxLength: 128, nullable: false),
-                    TaxAmount = table.Column<string>(maxLength: 100, nullable: true),
-                    PaymentStatus = table.Column<int>(nullable: true),
-                    SaleId = table.Column<Guid>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SalesDetails", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_SalesDetails_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_SalesDetails_Sales_SaleId",
-                        column: x => x.SaleId,
-                        principalTable: "Sales",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
@@ -491,24 +522,9 @@ namespace POS.Data.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_UOMId",
-                table: "Products",
-                column: "UOMId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Sales_CustomerId",
                 table: "Sales",
                 column: "CustomerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SalesDetails_ProductId",
-                table: "SalesDetails",
-                column: "ProductId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SalesDetails_SaleId",
-                table: "SalesDetails",
-                column: "SaleId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -538,16 +554,31 @@ namespace POS.Data.Migrations
                 name: "CustomerOrders");
 
             migrationBuilder.DropTable(
+                name: "CyberServices");
+
+            migrationBuilder.DropTable(
                 name: "Invoices");
 
             migrationBuilder.DropTable(
                 name: "MpesaExpressResponses");
 
             migrationBuilder.DropTable(
+                name: "ProductNames");
+
+            migrationBuilder.DropTable(
+                name: "Sales");
+
+            migrationBuilder.DropTable(
                 name: "SalesDetails");
 
             migrationBuilder.DropTable(
+                name: "Stocks");
+
+            migrationBuilder.DropTable(
                 name: "Suppliers");
+
+            migrationBuilder.DropTable(
+                name: "UOMs");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -557,12 +588,6 @@ namespace POS.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Products");
-
-            migrationBuilder.DropTable(
-                name: "Sales");
-
-            migrationBuilder.DropTable(
-                name: "UOMs");
 
             migrationBuilder.DropTable(
                 name: "Customers");

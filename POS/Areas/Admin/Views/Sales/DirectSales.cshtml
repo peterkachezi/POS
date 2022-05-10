@@ -210,7 +210,7 @@
                     <strong> Transaction was successfull ,click Yes to print the receipt or No to Cancel</strong>
                 </div>
 
-                <input type="text" id="txtOrderNumber" />
+                <input type="hidden" id="txtOrderNumber" />
 
             </div>
             <div class="modal-footer">
@@ -621,8 +621,15 @@
 
                 console.log(data);
 
-                if (data == null) {
-                    alert("Does not exist");
+                if (data.data == false) {
+
+                    swal({
+                        position: 'top-end',
+                        type: "error",
+                        title: "This product is out stock",
+                        showConfirmButton: true,
+                    });
+
                 } else {
 
                     $("#txtProduct_Id").val(data.data.id);

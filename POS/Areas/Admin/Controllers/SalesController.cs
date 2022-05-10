@@ -43,6 +43,12 @@ namespace POS.Areas.Admin.Controllers
             return View(sales);
         }
 
+        public IActionResult ProductInformation()
+        {
+
+            return View();
+        }
+
         public async Task<IActionResult> DirectSales()
         {
 
@@ -50,8 +56,9 @@ namespace POS.Areas.Admin.Controllers
 
             if (products.Count == 0)
             {
-                return RedirectToAction("ProductInformation");
+                TempData["Error"] = "There are no products to sell at the moment .Please add products and try again";
 
+                return RedirectToAction("ProductInformation");
             }
             else
             {

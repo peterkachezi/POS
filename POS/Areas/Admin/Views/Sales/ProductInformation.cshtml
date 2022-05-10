@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewData["Title"] = "ProductInformation";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+<div class="top">
+    <div class="alert alert-warning alert-dismissible " role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+        <strong>Hi Merchant </strong>
+
+        @if (TempData["Error"] != null)
+        {
+      
+                @TempData["Error"].ToString()
+       
+        }
+
+    </div>
+
+</div>
+
+
+
+
+<style>
+    .top {
+        margin-top: 4rem;
+    }
+</style>
