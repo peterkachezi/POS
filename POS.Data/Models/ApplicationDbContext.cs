@@ -12,6 +12,8 @@ namespace POS.Data.Models
         {
 
         }
+        public virtual DbSet<Expense>  Expenses { get; set; }
+        public virtual DbSet<ExpenseType>  ExpenseTypes { get; set; }
         public virtual DbSet<ProductName> ProductNames { get; set; }
         public virtual DbSet<AppUser> AppUsers { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
@@ -32,6 +34,13 @@ namespace POS.Data.Models
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<Expense>(entity =>
+            {
+                entity.Property(e => e.Amount).HasColumnType("decimal(18,2)");
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).HasDefaultValueSql("NEWID()");
+            });
+
             modelBuilder.Entity<Brand>(entity =>
             {
                 entity.HasKey(e => e.Id);
@@ -42,6 +51,7 @@ namespace POS.Data.Models
             {
                 entity.Property(e => e.CostPrice).HasColumnType("decimal(18,2)");
                 entity.Property(e => e.SellingPrice).HasColumnType("decimal(18,2)");
+                entity.Property(e => e.ExpectedProfit).HasColumnType("decimal(18,2)");
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Id).HasDefaultValueSql("NEWID()");
             });
