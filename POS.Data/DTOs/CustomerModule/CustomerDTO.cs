@@ -7,7 +7,7 @@ namespace POS.Data.DTOs.CustomerModule
     public class CustomerDTO
     {
         public System.Guid Id { get; set; }
-        public string FullName => FirstName + "  " + MiddleName + "  " + LastName;
+        public string FullName => FirstName + "  " + LastName;
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }

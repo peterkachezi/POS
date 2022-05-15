@@ -30,6 +30,14 @@ namespace POS.SeedAppUsers
                     roleManager.CreateAsync(role).Wait();
                 }
 
+                if (!roleManager.RoleExistsAsync("CyberAdmin").Result)
+                {
+                    var role = new IdentityRole();
+
+                    role.Name = "CyberAdmin";
+
+                    roleManager.CreateAsync(role).Wait();
+                }
 
 
             }
@@ -79,7 +87,41 @@ namespace POS.SeedAppUsers
                 }
                 #endregion
 
- 
+                #region Cyber
+                var cyber = userManager.FindByEmailAsync("cyber@gmail.com");
+
+                if (cyber.Result == null)
+                {
+                    var user = new AppUser();
+
+                    user.UserName = "cyber@gmail.com";
+
+                    user.Email = "cyber@gmail.com";
+
+                    user.PhoneNumber = "0704509484";
+
+                    user.FirstName = "Skisoft";
+
+                    user.LastName = "Cyber";
+
+                    user.EmailConfirmed = true;
+
+                    user.isActive = true;
+
+                    user.CreateDate = DateTime.Now;
+
+                    string userPWD = "Cyber@2022";
+
+                    var chkUser = userManager.CreateAsync(user, userPWD);
+
+                    //Add default User to Role Admin    
+                    if (chkUser.Result.Succeeded)
+                    {
+                        userManager.AddToRoleAsync(user, "CyberAdmin").Wait();
+
+                    }
+                }
+                #endregion
 
             }
             catch (Exception ex)

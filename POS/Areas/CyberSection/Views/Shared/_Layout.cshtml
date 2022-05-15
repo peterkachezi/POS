@@ -5,8 +5,6 @@
 @inject UserManager<AppUser> UserManager
 
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +20,6 @@
         <link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">*@
     <link href="~/dashboard/bootstrap.min.css" rel="stylesheet" />
     <link href="~/dashboard/dataTables.bootstrap4.min.css" rel="stylesheet" />
-
 
 
     <!-- Bootstrap -->
@@ -50,7 +47,7 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="/Administrator/dashboard" class="site_title"><i class="fa fa-building"></i> <span>Skisoft Store</span></a>
+                        <a href="/CyberSection/dashboard" class="site_title"><i class="fa fa-building"></i> <span>Cyber Express</span></a>
                     </div>
 
                     <div class="clearfix"></div>
@@ -71,9 +68,9 @@
                                 var roles = (await UserManager.GetRolesAsync(user)).FirstOrDefault();
 
 
-                                if (roles == " CyberAdmin")
+                                if (roles == "CyberAdmin")
                                 {
-                                    <strong>@User.FindFirst("UserFirstName").Value</strong>
+                                    <strong style="color: #ffffff;">@User.FindFirst("UserFirstName").Value</strong>
 
                                     <div>
                                         <span>@roles</span>
@@ -111,118 +108,123 @@
 
 
                                 <li>
-                                    <a><i class="fa fa-money"></i> Purchases <span class="fa fa-chevron-down"></span></a>
+                                    <a><i class="fa fa-laptop"></i> Sales <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="~/Administrator/Sale/DirectSales/">Direct Sale</a></li>
-                                        <li><a href="~/Administrator/Sale/">Corporate Sale</a></li>
-                                        <li><a href="~/Administrator/Sale/CustomerOrders/">Customer Orders</a></li>
-                                        <li><a href="~/Administrator/Sale/SalesDetails/">Sales</a></li>                                   
-                                        <li><a href="~/Administrator/Payments">Mpesa Payments</a></li>
-                                        <li><a href="~/Administrator/Payments/TestStk">STK Push</a></li>
-                                        <li><a href="~/Administrator/Payments/ValidatePayment">Validate Payment</a></li>
-
-
+                                        <li><a href="~/CyberSection/POS/">POS</a></li>
+                                        <li><a href="#">Credit</a></li>
                                     </ul>
                                 </li>
 
 
 
                                 <li>
-                                    <a><i class="fa fa-home"></i> Receipts <span class="fa fa-chevron-down"></span></a>
+                                    <a><i class="fa fa-money"></i> Services <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="~/Administrator/POS/">Re-Generate Receipts</a></li>
-                                        <li><a href="~/Administrator/Credit/">Manage Invoices</a></li>
-
-                                    </ul>
-                                </li>
-
-                                <li>
-                                    <a><i class="fa fa-shopping-basket"></i> Suppliers <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="~/Admin/Suppliers/">Suppliers</a></li>
-
-                                    </ul>
-                                </li>
-
-                                <li>
-                                    <a><i class="fa fa-product-hunt"></i> Product Manager <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-
-                                        <li><a href="~/Admin/Brands/">Brands</a></li>
-                                        <li><a href="~/Admin/UOM/">Packaging</a></li>
-                                        <li><a href="~/Admin/Products/ProductName">Product Names</a></li>
-                                        <li><a href="~/Admin/Products/">Products</a></li>
-
-                                    </ul>
-                                </li>
-
-
-                                <li>
-                                    <a><i class="fa fa-table"></i> Stock <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="~/Admin/StockControl/">View Stock</a></li>
-                                        <li><a href="~/Admin/StockControl/StockEntry/">Single Stock Entry</a></li>
-                                        <li><a href="~/Admin/StockControl/BulkStockEntry/">Bulk Stock Entry </a></li>
-                                    </ul>
-                                </li>
-
-
-
-                                <li>
-                                    <a><i class="fa fa-group"></i>Customers<span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="~/Admin/Customers/">Customers</a></li>
+                                        <li><a href="~/CyberSection/Services/">List of Services</a></li>
 
                                     </ul>
                                 </li>
 
 
                                 <li>
-                                    <a><i class="fa fa-product-hunt"></i>Inventory<span class="fa fa-chevron-down"></span></a>
+                                    <a><i class="fa fa-group"></i>Customers<span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="~/Administrator/AssetsManager/Furnitures">Furnitures</a></li>
-                                        <li><a href="~/Administrator/AssetsManager/Electronics">Electronics</a></li>
-                                        <li><a href="~/Administrator/AssetsManager/Vehicles">Vehicles</a></li>
-
-                                    </ul>
-                                </li>
-
-                                <li>
-                                    <a><i class="fa fa-share"></i>Accounts<span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="~/Administrator/ExpenseTypes/">Expense Types</a></li>
-                                        <li><a href="~/Administrator/Expenses/">Expenses</a></li>
-                                        <li><a href="~/Administrator/POS/">Re-Generate Receipts</a></li>
-                                        <li><a href="~/Administrator/Credit/">Manage Invoices</a></li>
+                                        <li><a href="~/CyberSection/Customers/">Customers</a></li>
 
                                     </ul>
                                 </li>
 
 
-                                <li>
-                                    <a><i class="fa fa-envelope-o"></i>Reports<span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="#">Products</a></li>
-                                    </ul>
-                                </li>
 
 
-                                <li>
-                                    <a><i class="fa fa-cog"></i> Settings & Configuration <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-
-                                        <li><a href="#">Payment Settings</a></li>
-                                        <li><a href="~/Administrator/UserManagement/">Manage Users</a></li>
-
-                                     
-
-                                    </ul>
-                                </li>
-                               
                             </ul>
                         </div>
 
-                      
+                        <!--<div class="menu_section">
+                            <h3>Live On</h3>
+                            <ul class="nav side-menu">-->
+                        @*<li>
+                                <a><i class="fa fa-bug"></i> Settings & Configuration <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+
+                                    <li><a href="~/Admin/Branch/">Branches</a></li>
+                                    <li><a href="~/Admin/UserManagement/">Manage Users</a></li>
+                                    <li><a href="~/Admin/Role/">Users Roles</a></li>
+                                    <li><a href="~/Admin/Branch/">System Access Audit Trail</a></li>
+                                    <li><a href="~/Admin/Branch/">Manage Taxes</a></li>
+                                    <li><a href="~/Admin/Branch/">View Profile</a></li>
+                                    <li><a href="~/Admin/Company/">Company Profile</a></li>
+
+                                    <li><a href="~/Admin/Company/">Currency</a></li>
+                                    <li><a href="~/Admin/Company/">Branch</a></li>
+                                    <li><a href="~/Admin/Company/">Warehouse</a></li>
+                                    <li><a href="~/Admin/Company/">Cash Bank</a></li>
+                                    <li><a href="~/Admin/Company/">Payment Type</a></li>
+                                    <li><a href="~/Admin/Company/">Shipment Type</a></li>
+                                    <li><a href="~/Admin/Company/">Invoice Type</a></li>
+                                    <li><a href="~/Admin/Company/">Bill Type</a></li>
+
+                                </ul>
+                            </li>*@
+
+
+
+
+                        <!--<!--<li>
+                            <a><i class="fa fa-windows"></i> Human Resource <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">-->
+                        <!--@*<li><a href="page_403.html">403 Error</a></li>
+                          <li><a href="page_404.html">404 Error</a></li>
+                          <li><a href="page_500.html">500 Error</a></li>
+                          <li><a href="plain_page.html">Plain Page</a></li>
+                          <li><a href="login.html">Login Page</a></li>
+                          <li><a href="pricing_tables.html">Pricing Tables</a><
+                          <!--@*<li><a href="page_403.html">403 Error</a></li>
+                              <li><a href="page_404.html">404 Error</a></li>
+                              <li><a href="page_500.html">500 Error</a></li>
+                              <li><a href="plain_page.html">Plain Page</a></li>
+                              <li><a href="login.html">Login Page</a></li>
+                              <li><a href="pricing_tables.html">Pricing Tables</a></li>*@-->
+                        <!--<!--</ul>
+                        </li>
+
+                        <li>
+                            <a><i class="fa fa-sitemap"></i>Reports <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li>
+                                    <a href="~/Admin/Report/Index">Sales</a>-->
+                        <!--@*<li><a href="#">Products</a>
+                          <li><a href="#">Suppliers</a>
+                          <li>
+                              <a href="#">Expenses
+                          <!--@*<li><a href="#">Products</a>
+                              <li><a href="#">Suppliers</a>
+                              <li>
+                                  <a href="#">Expenses</a>*@
+
+                          @*<li>
+                                  <a>Level One<span class="fa fa-chevron-down"></span></a>
+                                  <ul class="nav child_menu">
+                                      <li class="sub_menu">
+                                          <a href="level2.html">Level Two</a>
+                                      </li>
+                                      <li>
+                                          <a href="#level2_1">Level Two</a>
+                                      </li>
+                                      <li>
+                                          <a href="#level2_2">Level Two</a>
+                                      </li>
+                                  </ul>
+                              </li>
+                              <li>
+                                  <a href="#level1_2">Level One</a>
+                              </li>*@-->
+                        <!--<!--</ul>
+                        </li>-->
+                        <!--@*<li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a><
+                          <!--@*<li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>*@
+                              </ul>
+                          </div>-->
 
                     </div>
                     <!-- /sidebar menu -->

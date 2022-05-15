@@ -6,6 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Admin\Data\**" />
+    <Compile Remove="Areas\Admin\Models\**" />
+    <Content Remove="Areas\Admin\Data\**" />
+    <Content Remove="Areas\Admin\Models\**" />
+    <EmbeddedResource Remove="Areas\Admin\Data\**" />
+    <EmbeddedResource Remove="Areas\Admin\Models\**" />
+    <None Remove="Areas\Admin\Data\**" />
+    <None Remove="Areas\Admin\Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="wwwroot\Reports\Receipt.rdlc" />
   </ItemGroup>
 
@@ -45,10 +56,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\CyberServices\Data\" />
-    <Folder Include="Areas\CyberServices\Models\" />
+    <Folder Include="Areas\CyberSection\Data\" />
+    <Folder Include="Areas\CyberSection\Models\" />
     <Folder Include="wwwroot\ExpenseUploads\" />
   </ItemGroup>
 
@@ -221,6 +230,9 @@
     <None Include="wwwroot\dashboard\vendors\parsleyjs\bower_components\uwidget\LICENSE" />
     <None Include="wwwroot\dashboard\vendors\parsleyjs\bower_components\uwidget\uwidget.js" />
     <None Include="wwwroot\dashboard\vendors\parsleyjs\bower_components\uwidget\uwidget.less" />
+    <None Include="wwwroot\login\img\avatar.svg" />
+    <None Include="wwwroot\login\img\bg.svg" />
+    <None Include="wwwroot\login\js\main.js" />
     <None Include="wwwroot\Reports\Receipt.rdlc" />
   </ItemGroup>
 

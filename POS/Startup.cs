@@ -10,6 +10,8 @@ using POS.Data.Models;
 using POS.Data.Services.BrandModule;
 using POS.Data.Services.CountyModule;
 using POS.Data.Services.CustomerModule;
+using POS.Data.Services.CyberPOSModule;
+using POS.Data.Services.CyberServiceModule;
 using POS.Data.Services.ExpenseModule;
 using POS.Data.Services.ExpenseTypeModule;
 using POS.Data.Services.ProductModule;
@@ -71,6 +73,10 @@ namespace POS
             services.AddScoped<IExpenseTypeService, ExpenseTypeService>();
 
             services.AddScoped<IExpenseService, ExpenseService>();
+
+            services.AddScoped<ICyber_Service, Cyber_Service>();
+
+            services.AddScoped<ICyberPOSService, CyberPOSService>();
             
         }
 
@@ -106,12 +112,16 @@ namespace POS
             app.UseEndpoints(endpoints =>
             {
               endpoints.MapControllerRoute(
+              name: "CyberSection",
+              pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}");
+                
+              endpoints.MapControllerRoute(
               name: "Admin",
               pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}");
 
               endpoints.MapControllerRoute(
               name: "default",
-              pattern: "{controller=Home}/{action=Index}/{id?}");
+              pattern: "{controller=Account}/{action=Login}/{id?}");
             });
         }
 

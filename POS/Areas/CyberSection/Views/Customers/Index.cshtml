@@ -1,7 +1,7 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/CyberSection/Views/Shared/_Layout.cshtml";
 }
 
 <!-- Our Products Table -->
@@ -54,7 +54,6 @@
         </div>
     </div>
 </div>
-
 
 <div class="modal fade" id="AddCustomerModal" tabindex="-1" role="dialog" aria-labelledby="AddCustomerModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -178,6 +177,7 @@
     </div>
 </div>
 
+
 <div id="divLoader" style="display:none;" class="loader">
 
     <img src="~/loaders/loading-23.gif" alt="Loader" style="width:20em;" />
@@ -246,7 +246,7 @@
 
         var t = $('#tblCustomers').DataTable({
             "ajax": {
-                "url": "/Admin/Customers/GetCustomers",
+                "url": "/CyberSection/Customers/GetCustomers",
                 "type": "GET",
                 "datatype": "json"
             },
@@ -294,7 +294,6 @@
             return false;
         }
 
-  
 
         if ($('#txtLastName').val() == '') {
             $('#txtLastName').focus();
@@ -319,18 +318,7 @@
 
             return false;
         }
-
-        if ($('#txtEmail').val() == '') {
-            $('#txtEmail').focus();
-            swal({
-                position: 'top-end',
-                type: "error",
-                title: "Please enter Email Address",
-                showConfirmButton: true,
-            });
-
-            return false;
-        }
+               
 
 
         $("#AddCustomerModal").modal('hide');
@@ -341,7 +329,7 @@
 
         $.ajax({
             type: "POST",
-            url: "/Admin/Customers/Create", // NB: Use the correct action name
+            url: "/CyberSection/Customers/Create", // NB: Use the correct action name
             data: formData,
             dataType: 'json',
             contentType: false,
@@ -395,7 +383,6 @@
         }
 
 
-
         if ($('#txtLastName1').val() == '') {
             $('#txtLastName1').focus();
             swal({
@@ -420,17 +407,7 @@
             return false;
         }
 
-        if ($('#txtEmail1').val() == '') {
-            $('#txtEmail1').focus();
-            swal({
-                position: 'top-end',
-                type: "error",
-                title: "Please enter Email Address",
-                showConfirmButton: true,
-            });
-
-            return false;
-        }
+     
 
         $("#UpdateCustomerModal").modal('hide');
 
@@ -440,7 +417,7 @@
 
         $.ajax({
             type: "POST",
-            url: "/Admin/Customers/Update", // NB: Use the correct action name
+            url: "/CyberSection/Customers/Update", // NB: Use the correct action name
             data: formData,
             dataType: 'json',
             contentType: false,
@@ -510,7 +487,7 @@
 
                     type: "GET",
 
-                    url: "/Admin/Customers/Delete/" + id,
+                    url: "/CyberSection/Customers/Delete/" + id,
 
                     success: function (response) {
 
@@ -569,7 +546,7 @@
         var id = e;
         console.log(id);
 
-        $.get("/Admin/Customers/GetById/?Id=" + id, function (data, status) {
+        $.get("/CyberSection/Customers/GetById/?Id=" + id, function (data, status) {
             console.log(data);
             if (data == null) {
                 alert("Does not exist");
@@ -591,4 +568,5 @@
 
 
 </script>
+
 

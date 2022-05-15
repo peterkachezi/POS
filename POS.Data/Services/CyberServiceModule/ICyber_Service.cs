@@ -11,6 +11,6 @@ namespace POS.Data.Services.CyberServiceModule
         Task<CyberServiceDTO> Update(CyberServiceDTO cyberServiceDTO);
         Task<bool> Delete(Guid Id);
         Task<CyberServiceDTO> GetById(Guid Id);
-        Task<List<CyberServiceDTO>> GetAll(Guid Id);
+        Task<List<CyberServiceDTO>> GetAll();
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 @{
-    ViewData["Title"] = "DirectSales";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/CyberSection/Views/Shared/_Layout.cshtml";
 }
 
 
@@ -16,13 +16,17 @@
                     <div class="row form-group">
 
                         <div class="col-md-4">
-                            <label class="card-title Header">Select Product</label>
-                            <select class="form-control" name="Id" id="txtProductId">
-                                @if (ViewBag.Products != null)
+                            <label class="card-title Header">Select Service</label>
+
+                            <select class="form-control" name="Id" id="txtServiceId">
+
+                                <option value="" selected disabled hidden>Select Service</option>
+
+                                @if (ViewBag.Services != null)
                                 {
-                                    foreach (var data in ViewBag.Products)
+                                    foreach (var data in ViewBag.Services)
                                     {
-                                        <option value="@data.Id"> @data.FullProductName</option>
+                                        <option value="@data.Id"> @data.Name</option>
                                     }
                                 }
 
@@ -42,8 +46,8 @@
                         <div class="col-md-4" style="display:none;">
                             <div class="form-group">
                                 Item Name:
-                                <input type="text" id="txtItemName" name="ItemName" class="form-control" />
-                                <input type="text" id="txtProduct_Id" name="ProductId" class="form-control" />
+                                <input type="text" id="txtServiceName" name="ItemName" class="form-control" />
+                                <input type="text" id="txtService_Id" name="ProductId" class="form-control" />
 
                             </div>
 
@@ -51,21 +55,13 @@
 
                         <div class="col-md-2">
                             <div class="form-group row">
-                                <label for="inputPassword" class="col-sm-10 col-form-label"><strong>Available Quantity:</strong></label>
+                                <label for="inputPassword" class="col-sm-10 col-form-label"><strong>Amount:</strong></label>
                                 <div class="col-sm-10">
-                                    <input type="text" id="txtCurrentQuantity" name="" value="0" class="form-control numericOnly" readonly="readonly" />
+                                    <input type="text" id="txtServiceAmount" name="" value="0" class="form-control numericOnly" readonly="readonly" />
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group row">
-                                <label for="inputPassword" class="col-sm-10 col-form-label"><strong>Price:</strong></label>
-                                <div class="col-sm-10">
-                                    <input type="text" value="0.00" id="txtPrice" readonly name="Price" class="form-control" onchange="CalculateSubTotal()" />
-                                </div>
-                            </div>
-                        </div>
+                                           
 
                         <div class="col-md-2">
                             <div class="form-group row">
@@ -278,7 +274,7 @@
 
         $("#btnAddToList").click(function () {
 
-            txtCurrentQuantity
+            txtServiceAmount
 
             AddToTheList();
         });
@@ -295,16 +291,17 @@
 
     });
 
-    $("#btnPrint").click(function () {
+    //$("#btnPrint").click(function () {
 
-        var orderNumber = $('#txtOrderNumber').val();
+    //    var orderNumber = $('#txtOrderNumber').val();
 
-        console.log(orderNumber);
+    //    console.log(orderNumber);
 
-        window.location.href = "/Admin/Sales/GetReceipt?OrderNumber=" + orderNumber;
+    //    var url = "/CyberSection/POS/GetReceipt?OrderNumber=" + orderNumber;
 
+    //    window.open(window.location.href = url, '_blank');
 
-    })
+    //})
 
     $("#btnCancel").click(function () {
 
@@ -342,29 +339,16 @@
         }
 
 
-        //if ($('#txtPaymentAmount').parseFloat() < $('#txtTotalAmount').val()) {
-        //    $('#txtPaymentAmount').focus();
-        //    swal({
-        //        position: 'top-end',
-        //        type: "error",
-        //        title: "You have entered insufficient funds",
-        //        showConfirmButton: true,
-        //    });
-        //    $("#divLoader").hide();
-        //    return false;
-        //}
-
 
         var OrderDTO = {};
 
-        ListOfSalesDetails = new Array();
+        ListOfCyberSaleDetails = new Array();
 
         OrderDTO.customerId = $("#txtCustomerId").val();
         OrderDTO.id = $("#txtPaymentModeId").val();
         OrderDTO.totalAmount = $("#txtTotalAmount").val();
         OrderDTO.change = $("#txtBalance").val();
         OrderDTO.cashPaid = $("#txtPaymentAmount").val();
-
 
 
         $("#tblProducts").find("tr:gt(0)").each(function () {
@@ -377,18 +361,18 @@
             SalesOrderDetailsDTO.Quantity = parseFloat($(this).find("td:eq(3)").text());
             SalesOrderDetailsDTO.Discount = parseFloat($(this).find("td:eq(4)").text());
 
-            ListOfSalesDetails.push(SalesOrderDetailsDTO);
+            ListOfCyberSaleDetails.push(SalesOrderDetailsDTO);
 
         });
 
-        OrderDTO.ListOfSalesDetails = ListOfSalesDetails;
+        OrderDTO.ListOfCyberSaleDetails = ListOfCyberSaleDetails;
 
         console.log(OrderDTO);
 
         $.ajax({
 
             type: "POST",
-            url: "/Admin/Sales/SaveTransaction/",
+            url: "/CyberSection/POS/SaveTransaction/",
             data: OrderDTO,
 
             success: function (response) {
@@ -445,8 +429,8 @@
             return false;
         }
 
-        if ($('#txtCurrentQuantity').val() == '' || $('#txtCurrentQuantity').val() == '0.00' || $('#txtCurrentQuantity').val() == '0') {
-            $('#txtCurrentQuantity').focus();
+        if ($('#txtServiceAmount').val() == '' || $('#txtServiceAmount').val() == '0.00' || $('#txtServiceAmount').val() == '0') {
+            $('#txtServiceAmount').focus();
             swal({
                 position: 'top-end',
                 type: "error",
@@ -458,8 +442,8 @@
         }
 
 
-        if ($('#txtCurrentQuantity').val() < 1) {
-            $('#txtCurrentQuantity').focus();
+        if ($('#txtServiceAmount').val() < 1) {
+            $('#txtServiceAmount').focus();
             swal({
                 position: 'top-end',
                 type: "error",
@@ -469,33 +453,16 @@
 
             return false;
         }
-
-
-
-        //if ($('#txtQuantity').val() > $('#txtCurrentQuantity').val()) {
-        //    $('#txtQuantity').focus();
-        //    swal({
-        //        position: 'top-end',
-        //        type: "error",
-        //        title: "The quantity entered exceeds the available stock",
-        //        showConfirmButton: true,
-        //    });
-
-        //    return false;
-        //}
-
-
-
 
 
 
         var tblItemList = $("#tblProducts");
 
-        var SellingPrice = parseFloat($("[id*=txtPrice]").val());
+        var SellingPrice = parseFloat($("[id*=txtServiceAmount]").val());
         var Quantity = parseFloat($("[id*=txtQuantity]").val());
         var Discount = parseFloat($("[id*=txtDiscount]").val());
-        var ProductId = $("[id*=txtProduct_Id]").val();
-        var ItemName = $("#txtItemName").val();
+        var ProductId = $("[id*=txtService_Id]").val();
+        var ItemName = $("#txtServiceName").val();
         var Total = parseFloat(SellingPrice * Quantity) - Discount;
 
         console.log(ProductId)
@@ -535,11 +502,11 @@
 
 
     function ResetItem() {
-        $("#txtPrice").val('0.00');
+   
         $("#txtQuantity").val('0');
         $("#txtDiscount").val('0.00');
         $("#txtTotal").val('0.00');
-        $("#txtCurrentQuantity").val('0');
+        $("#txtServiceAmount").val('0');
     }
 
     function FinaItemTotal() {
@@ -575,7 +542,7 @@
 
     function CalculateSubTotal() {
 
-        var SellingPrice = parseFloat($("[id*=txtPrice]").val());
+        var SellingPrice = parseFloat($("[id*=txtServiceAmount]").val());
         var Quantity = parseFloat($("[id*=txtQuantity]").val());
         var Discount = parseFloat($("[id*=txtDiscount]").val());
         var total = parseFloat(SellingPrice * Quantity) - Discount;
@@ -589,14 +556,11 @@
     };
 
 
-
-
-
     $('#btnGetProductData').click(function () {
 
 
-        if ($('#txtProductId').val() == '') {
-            $('#txtProductId').focus();
+        if ($('#txtServiceId').val() == '') {
+            $('#txtServiceId').focus();
             swal({
                 position: 'top-end',
                 type: "error",
@@ -607,11 +571,11 @@
             return false;
         }
 
-        var id = $('#txtProductId').val();
+        var id = $('#txtServiceId').val();
 
         console.log(id);
 
-        $.get("/Admin/StockControl/GetById/?Id=" + id,
+        $.get("/CyberSection/Services/GetById/?Id=" + id,
 
             function (data, status) {
 
@@ -628,19 +592,17 @@
 
                 } else {
 
-                    $("#txtProduct_Id").val(data.data.id);
-                    $("#txtItemName").val(data.data.fullProductName);
-                    $("#txtCurrentQuantity").val(data.data.quantity);
-                    $("#txtPrice").val(data.data.sellingPrice);
+                    $("#txtService_Id").val(data.data.id);
+
+                    $("#txtServiceName").val(data.data.name);
+
+                    $("#txtServiceAmount").val(data.data.amount);               
 
                 }
 
             });
        
     })
-
-
-
 
     //Allow users to enter numbers only
     $(".numericOnly").bind('keypress', function (e) {
@@ -659,6 +621,8 @@
     });
 
 </script>
+
+
 
 
 

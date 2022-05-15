@@ -33,8 +33,6 @@ namespace POS.Data.Services.CustomerModule
 
                     FirstName = customerDTO.FirstName.Substring(0, 1).ToUpper() + customerDTO.FirstName.Substring(1).ToLower().Trim(),
 
-                    MiddleName = customerDTO.MiddleName.Substring(0, 1).ToUpper() + customerDTO.MiddleName.Substring(1).ToLower().Trim(),
-
                     LastName = customerDTO.LastName.Substring(0, 1).ToUpper() + customerDTO.LastName.Substring(1).ToLower().Trim(),
 
                     Email = customerDTO.Email.ToLower().Trim(),
@@ -103,8 +101,6 @@ namespace POS.Data.Services.CustomerModule
                     {
                         s.FirstName = customerDTO.FirstName.Substring(0, 1).ToUpper() + customerDTO.FirstName.Substring(1).ToLower().Trim();
 
-                        s.MiddleName = customerDTO.MiddleName.Substring(0, 1).ToUpper() + customerDTO.MiddleName.Substring(1).ToLower().Trim();
-
                         s.LastName = customerDTO.LastName.Substring(0, 1).ToUpper() + customerDTO.LastName.Substring(1).ToLower().Trim();
 
                         s.Email = customerDTO.Email.ToLower().Trim();
@@ -144,9 +140,7 @@ namespace POS.Data.Services.CustomerModule
                                  {
                                      Id = c.Id,
 
-                                     FirstName = c.FirstName,
-
-                                     MiddleName = c.MiddleName,
+                                     FirstName = c.FirstName,                        
 
                                      LastName = c.LastName,
 
@@ -186,8 +180,6 @@ namespace POS.Data.Services.CustomerModule
                     Id = customer.Id,
 
                     FirstName = customer.FirstName,
-
-                    MiddleName = customer.MiddleName,
 
                     LastName = customer.LastName,
 

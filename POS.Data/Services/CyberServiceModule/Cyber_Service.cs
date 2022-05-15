@@ -75,7 +75,7 @@ namespace POS.Data.Services.CyberServiceModule
             }
         }
 
-        public async Task<List<CyberServiceDTO>> GetAll(Guid Id)
+        public async Task<List<CyberServiceDTO>> GetAll()
         {
             var services = (from s in context.CyberServices
 
@@ -133,17 +133,24 @@ namespace POS.Data.Services.CyberServiceModule
             {
                 using (var transaction = context.Database.BeginTransaction())
                 {
-
                     var s = await context.CyberServices.FindAsync(cyberServiceDTO.Id);
+
+                    if (s != null)
                     {
+
                         s.Name = cyberServiceDTO.Name;
 
                         s.Amount = cyberServiceDTO.Amount;
-                    };
 
-                    transaction.Commit();
+                        transaction.Commit();
 
-                    await context.SaveChangesAsync();
+                        await context.SaveChangesAsync();
+
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
 
                 return cyberServiceDTO;

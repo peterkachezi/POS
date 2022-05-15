@@ -50,7 +50,7 @@ namespace POS.Controllers
         {
             await signInManager.SignOutAsync();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
         public IActionResult Login()
         {
@@ -99,9 +99,9 @@ namespace POS.Controllers
                         }
 
 
-                        if (getUserRole == "Agent")
+                        if (getUserRole == "CyberAdmin")
                         {
-                            return RedirectToAction("Index", "Dashboard", new { area = "Agent" });
+                            return RedirectToAction("Index", "Dashboard", new { area = "CyberSection" });
                         }
 
 

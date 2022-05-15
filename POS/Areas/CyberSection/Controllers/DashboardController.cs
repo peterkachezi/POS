@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace POS.Areas.CyberServices.Controllers
+namespace POS.Areas.CyberSection.Controllers
 {
+    [Area("CyberSection")]
     public class DashboardController : Controller
     {
         public IActionResult Index()

@@ -41,7 +41,6 @@ namespace POS.Areas.Admin.Controllers
 
             return View();
         }
-
         public async Task<IActionResult> GetExpenses()
         {
             try
@@ -57,10 +56,6 @@ namespace POS.Areas.Admin.Controllers
                 return null;
             }
         }
-
-
-
-
         public async Task<IActionResult> UploadExpenses(IFormFile ImageName, ExpenseDTO expenseDTO)
         {
             try
@@ -149,10 +144,6 @@ namespace POS.Areas.Admin.Controllers
 
             }
         }
-
-
-
-
         public async Task<IActionResult> Update(ExpenseDTO expenseDTO)
         {
             try
