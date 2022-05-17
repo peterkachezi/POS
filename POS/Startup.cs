@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using POS.Data.Models;
+using POS.Data.Services.ApplicationUserServiceModule;
 using POS.Data.Services.BrandModule;
 using POS.Data.Services.CountyModule;
 using POS.Data.Services.CustomerModule;
@@ -77,6 +78,8 @@ namespace POS
             services.AddScoped<ICyber_Service, Cyber_Service>();
 
             services.AddScoped<ICyberPOSService, CyberPOSService>();
+
+            services.AddScoped<IApplicationUserService, ApplicationUserService>();
             
         }
 

@@ -63,6 +63,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Areas\CyberSection\Views\UserManager\Index.cshtml" />
+    <None Include="Areas\CyberSection\Views\UserManager\UpdatePassword.cshtml" />
+    <None Include="Areas\CyberSection\Views\UserManager\UserProfile.cshtml" />
     <None Include="wwwroot\dashboard\vendors\bootstrap\.github\CODEOWNERS" />
     <None Include="wwwroot\dashboard\vendors\bootstrap\.github\CONTRIBUTING.md" />
     <None Include="wwwroot\dashboard\vendors\bootstrap\.github\ISSUE_TEMPLATE\bug.md" />

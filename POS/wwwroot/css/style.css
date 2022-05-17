@@ -1,0 +1,239 @@
+﻿
+.img {
+    height: 8rem;
+    width: 11rem;
+    margin-left: -11rem;
+}
+
+.ribbon {
+    border-radius: 1.5rem;
+    box-shadow: 4px 4px;
+}
+
+.ribbon_img {
+    border-radius: 1.5rem;
+    box-shadow: 4px 4px;
+    height: 4rem;
+}
+
+.x_panel {
+    border-radius: 1.5rem;
+  /*  box-shadow: 3px 3px;*/
+
+}
+
+.top_panel {
+    border-radius: 1.5rem;
+/*    box-shadow: 3px 3px;*/
+    /* border-left-color: #3e9ebe;
+    border-left-width: 0.3rem;*/
+}
+
+.myinputs {
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #d9d9d9;
+    border-radius: 0.5rem;
+}
+
+.loader {
+    position: fixed;
+    width: 256px;
+    height: 256px;
+    top: 50%;
+    left: 50%;
+    margin: -128px 0 0 -128px;
+    z-index: 1000;
+}
+
+
+.pending {
+    padding: 4px 8px;
+    height: 1.6rem;
+    color: #fff;
+    background-color: #ff9801;
+    border-color: #ffc107;
+}
+
+.booked {
+    padding: 4px 8px;
+    height: 1.6rem;
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #1c7430;
+}
+
+.completed {
+    padding: 4px 8px;
+    height: 1.6rem;
+    color: #fff;
+    background-color: #66aa18;
+    border-color: #1c7430;
+}
+
+.paid {
+    padding: 4px 8px;
+    height: 1.6rem;
+    color: #fff;
+    background-color: #66aa18;
+    border-color: #1c7430;
+}
+
+.success {
+    background: #26B99A;
+    color: #fff;
+}
+
+.danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.header {
+    font-weight: 600;
+    color: #45ca9f;
+    font-size: 1.1rem;
+    max-width: calc(100% - 40px);
+}
+
+.profile_details {
+    font-weight: 600;
+    color: #24322d;
+    font-size: 1.1rem;
+    max-width: calc(100% - 40px);
+}
+
+.patient_reg_header {
+    font-weight: 600;
+    color: #080808;
+    font-size: 1.1rem;
+    max-width: calc(100% - 40px);
+}
+
+.loader {
+    position: fixed;
+    width: 256px;
+    height: 256px;
+    top: 50%;
+    left: 50%;
+    margin: -128px 0 0 -128px;
+    z-index: 1000;
+}
+
+.title {
+    font-weight: 600;
+    color: #45ca9f;
+    font-size: 1.1rem;
+    max-width: calc(100% - 40px);
+}
+
+
+
+table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+}
+
+    table th {
+        background-color: #F7F7F7;
+        color: #333;
+        font-weight: bold;
+    }
+
+    table th, table td {
+        padding: 5px;
+        width: 300px;
+        border: 1px solid #ccc;
+        font-size:13px;
+    }
+
+
+
+.text-bold, .text-bold.table td, .text-bold.table th {
+    font-weight: 700;
+}
+
+.bg-gray {
+    color: #ffffff;
+    background-color: #14bf98 !important;
+}
+
+.panel-body {
+    padding: 8px;
+    border-radius: 1.5rem;
+   
+}
+
+.panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+    box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+}
+
+
+.requested {
+    padding: 4px 8px;
+    height: 1.6rem;
+    color: #fff;
+    background-color: #ff5722;
+    border-color: #ff5722;
+}
+
+.notrequested {
+    padding: 4px 8px;
+    height: 1.6rem;
+    color: #fff;
+    background-color: #2d3235;
+    border-color: #2d3235;
+}
+
+
+.active_user {
+    padding: 4px 8px;
+    height: 1.6rem;
+    color: #fff;
+    background-color: #26B99A;
+    border-color: #1c7430;
+}
+
+.disabled_user {
+    padding: 4px 8px;
+    height: 1.6rem;
+    color: #fff;
+    background-color: #ff5722;
+    border-color: #ff5722;
+}
+
+.center {
+    margin: auto;
+    width: 60%;
+    border: 3px solid #73AD21;
+    padding: 10px;
+}
+
+.scrollbar {
+    overflow-y: scroll;
+    height: 550px;
+}
+
+.gridview th {
+    padding: 4px 2px;
+    color: #fff;
+    font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    background: #2a3f54;
+    border-left-color: #CCCCCC;
+    border-right-color: #CCCCCC;
+    border-top-color: #CCCCCC;
+}

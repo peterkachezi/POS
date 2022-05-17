@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using MimeKit;
+using POS.Data.DTOs.ApplicationUsersModule;
 using POS.Data.DTOs.CustomerModule;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,12 @@ namespace POS.Services
             this.env = env;
         }
 
-        public bool SendEmailNotification(CustomerDTO customerDTO)
+        public bool PasswordResetEmailNotification(ResetPasswordDTO resetPasswordDTO)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool SendAccountCreationEmailNotification(ApplicationUserDTO applicationUserDTO)
         {
             try
             {
@@ -41,21 +47,23 @@ namespace POS.Services
 
                 var SMTPUseSSL = config.GetValue<string>("MailSettings:SMTPUseSSL");
 
-                MailAddressCollection mailAddressesTo = new MailAddressCollection();
-
-                mailAddressesTo.Add(new MailAddress(customerDTO.Email));
+                MailAddressCollection mailAddressesTo = new MailAddressCollection
+                {
+                    new MailAddress(applicationUserDTO.Email)
+                };
 
                 MailAddress mailAddressFrom = new MailAddress(SMTPUserName);
 
-                MailMessage mailMessage = new MailMessage();
-
-                mailMessage.From = mailAddressFrom;
+                MailMessage mailMessage = new MailMessage
+                {
+                    From = mailAddressFrom
+                };
 
                 foreach (var to in mailAddressesTo)
                     mailMessage.To.Add(to);
 
 
-                mailMessage.Subject = "Skisoft Systems: ";
+                mailMessage.Subject = "Healthier Kenya: ";
 
                 var templatePath = env.WebRootPath
                            + Path.DirectorySeparatorChar.ToString()
@@ -63,7 +71,7 @@ namespace POS.Services
                            + Path.DirectorySeparatorChar.ToString()
                            + "EmailTemplate"
                            + Path.DirectorySeparatorChar.ToString()
-                           + "CustomerNotification.html";
+                           + "UserAccountNotification.html";
 
                 var builder = new BodyBuilder();
 
@@ -78,9 +86,15 @@ namespace POS.Services
 
                 mailMessage.Body = string.Format(builder.HtmlBody,
 
-                     customerDTO.FirstName,
+                     applicationUserDTO.FullName,
 
-                     customerDTO.CustomerNumber
+                     applicationUserDTO.Email,
+
+                     applicationUserDTO.Password,
+
+                     applicationUserDTO.RoleName,
+
+                     applicationUserDTO.RegionName
 
                     );
 
@@ -107,8 +121,11 @@ namespace POS.Services
                     }
 
                     client.Credentials = new NetworkCredential(SMTPUserName, Password);
+
                     client.ServicePoint.MaxIdleTime = 2;
+
                     client.ServicePoint.ConnectionLimit = 1;
+
                     client.Send(mailMessage);
                 }
 
@@ -123,111 +140,8 @@ namespace POS.Services
 
                 return false;
             }
-
         }
-        //public bool SendEmailNotification(CustomerDTO customerDTO)
-        //{
-        //    try
-        //    {
-        //        var SMTPEmailToNetwork = config.GetValue<string>("MailSettings:SMTPEmailToNetwork");
 
-        //        var SMTPMailServer = config.GetValue<string>("MailSettings:SMTPMailServer");
-
-        //        var SMTPPort = config.GetValue<string>("MailSettings:SMTPPort");
-
-        //        var SMTPUserName = config.GetValue<string>("MailSettings:SMTPUserName");
-
-        //        var Password = config.GetValue<string>("MailSettings:Password");
-
-        //        var SMTPUseSSL = config.GetValue<string>("MailSettings:SMTPUseSSL");
-
-        //        MailAddressCollection mailAddressesTo = new MailAddressCollection();
-
-        //        mailAddressesTo.Add(new MailAddress(customerDTO.Email));
-
-        //        MailAddress mailAddressFrom = new MailAddress(SMTPUserName);
-
-        //        MailMessage mailMessage = new MailMessage();
-
-        //        mailMessage.From = mailAddressFrom;
-
-        //        foreach (var to in mailAddressesTo)
-        //            mailMessage.To.Add(to);
-
-
-        //        mailMessage.Subject = "Healthier Kenya: ";
-
-        //        var templatePath = env.WebRootPath
-        //                   + Path.DirectorySeparatorChar.ToString()
-        //                   + "Templates"
-        //                   + Path.DirectorySeparatorChar.ToString()
-        //                   + "EmailTemplate"
-        //                   + Path.DirectorySeparatorChar.ToString()
-        //                   + "UserAccountNotification.html";
-
-        //        var builder = new BodyBuilder();
-
-        //        using (StreamReader SourceReader = System.IO.File.OpenText(templatePath))
-        //        {
-
-        //            builder.HtmlBody = SourceReader.ReadToEnd();
-
-        //        }
-
-        //        mailMessage.BodyEncoding = System.Text.Encoding.UTF8;
-
-        //        mailMessage.Body = string.Format(builder.HtmlBody,
-
-        //             applicationUserDTO.Password,
-
-        //             applicationUserDTO.Email,
-
-        //             applicationUserDTO.RoleName,
-
-        //             applicationUserDTO.FullName
-
-        //            );
-
-        //        mailMessage.IsBodyHtml = true;
-
-        //        using (SmtpClient client = new SmtpClient())
-        //        {
-        //            client.Host = SMTPMailServer;
-        //            client.Port = int.Parse(SMTPPort);
-        //            if (SMTPUseSSL != string.Empty)
-        //            {
-        //                client.EnableSsl = bool.Parse(SMTPUseSSL);
-        //            }
-
-        //            client.UseDefaultCredentials = false;
-        //            bool bNetwork = bool.Parse(SMTPEmailToNetwork);
-        //            if (bNetwork)
-        //            {
-        //                client.DeliveryMethod = SmtpDeliveryMethod.Network;
-        //            }
-        //            else
-        //            {
-        //                client.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
-        //            }
-
-        //            client.Credentials = new NetworkCredential(SMTPUserName, Password);
-        //            client.ServicePoint.MaxIdleTime = 2;
-        //            client.ServicePoint.ConnectionLimit = 1;
-        //            client.Send(mailMessage);
-        //        }
-
-        //        return true;
-
-        //    }
-
-
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine(ex.Message);
-
-        //        return false;
-        //    }
-
-        //}
+  
     }
 }

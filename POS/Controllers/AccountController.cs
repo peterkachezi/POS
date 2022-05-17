@@ -73,7 +73,7 @@ namespace POS.Controllers
                         return RedirectToAction("Login", "Account");
                     }
 
-                    if (user.isActive == false)
+                    if (user.IsActive == false)
                     {
                         TempData["Error"] = "Your account has been disabled,kindly contact system administrator";
 

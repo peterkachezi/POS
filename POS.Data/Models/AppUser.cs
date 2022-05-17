@@ -9,7 +9,8 @@ namespace POS.Data.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }  
-        public bool isActive { get; set; }
+        public string CreatedBy { get; set; }  
+        public bool IsActive { get; set; }
         public DateTime CreateDate { get; set; }
 
     }

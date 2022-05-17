@@ -39,6 +39,14 @@ namespace POS.SeedAppUsers
                     roleManager.CreateAsync(role).Wait();
                 }
 
+                if (!roleManager.RoleExistsAsync("User").Result)
+                {
+                    var role = new IdentityRole();
+
+                    role.Name = "User";
+
+                    roleManager.CreateAsync(role).Wait();
+                }
 
             }
             catch (Exception ex)
@@ -70,7 +78,7 @@ namespace POS.SeedAppUsers
 
                     user.EmailConfirmed = true;
 
-                    user.isActive = true;
+                    user.IsActive = true;
 
                     user.CreateDate = DateTime.Now;
 
@@ -106,7 +114,7 @@ namespace POS.SeedAppUsers
 
                     user.EmailConfirmed = true;
 
-                    user.isActive = true;
+                    user.IsActive = true;
 
                     user.CreateDate = DateTime.Now;
 
@@ -122,6 +130,7 @@ namespace POS.SeedAppUsers
                     }
                 }
                 #endregion
+
 
             }
             catch (Exception ex)

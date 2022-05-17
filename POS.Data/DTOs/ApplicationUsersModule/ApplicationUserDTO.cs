@@ -22,7 +22,7 @@ namespace POS.Data.DTOs.ApplicationUsersModule
         public string PhoneNumber { get; set; }
         public bool PhoneNumberConfirmed { get; set; }
         public bool TwoFactorEnabled { get; set; }
-        public bool isActive { get; set; }
+        public bool IsActive { get; set; }
         public DateTime LockoutEnd { get; set; }
         public bool LockoutEnabled { get; set; }
         public int AccessFailedCount { get; set; }
@@ -39,5 +39,8 @@ namespace POS.Data.DTOs.ApplicationUsersModule
         public string Password { get; set; }
         public int Commissions { get; set; }
         public string NewCreateDate { get { return CreateDate.ToShortDateString(); } }
+        public string CreatedBy { get; set; }
+        public string CreatedByName { get; set; }
+        public string RegionName { get; set; }
     }
 }

@@ -13,11 +13,11 @@ namespace POS.Data.Models
 
         }
         public virtual DbSet<CyberSaleDetail>  CyberSaleDetails { get; set; }
+        public virtual DbSet<AppUser>  AppUsers  { get; set; }
         public virtual DbSet<CyberSale>   CyberSales { get; set; }
         public virtual DbSet<Expense>  Expenses { get; set; }
         public virtual DbSet<ExpenseType>  ExpenseTypes { get; set; }
         public virtual DbSet<ProductName> ProductNames { get; set; }
-        public virtual DbSet<AppUser> AppUsers { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<CustomerOrder> CustomerOrders { get; set; }
         public virtual DbSet<Product> Products { get; set; }
@@ -76,10 +76,10 @@ namespace POS.Data.Models
                 entity.Property(e => e.Id).HasDefaultValueSql("NEWID()");
             });
 
-            seed(modelBuilder);
+            Seed(modelBuilder);
         }
 
-        public static void seed(ModelBuilder modelBuilder)
+        public static void Seed(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<County>().HasData(
             new County { Id = 1, Name = "Bomet" },

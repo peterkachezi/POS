@@ -89,7 +89,7 @@ namespace POS.Areas.Admin.Controllers
                 if (result != null)
                 {
 
-                    var sendMail = mailService.SendEmailNotification(customerDTO);
+                    //var sendMail = mailService.SendAccountCreationEmailNotification(customerDTO);
 
                     //var s = iSMSService.SendCustomerSMS(customerDTO);
 

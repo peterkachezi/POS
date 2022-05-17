@@ -12,7 +12,7 @@ namespace POS.Data.Services.CyberPOSModule
 {
     public class CyberPOSService : ICyberPOSService
     {
-        private ApplicationDbContext context;
+        private readonly ApplicationDbContext context;
 
         public CyberPOSService(ApplicationDbContext context)
         {
