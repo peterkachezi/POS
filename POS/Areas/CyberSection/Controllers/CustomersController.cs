@@ -18,7 +18,6 @@ namespace POS.Areas.CyberSection.Controllers
     {
         private readonly ICustomersService customerService;
 
-
         private readonly IMessagingService  messagingService;
 
         private readonly IMailService mailService;
@@ -88,20 +87,6 @@ namespace POS.Areas.CyberSection.Controllers
 
                 if (result != null)
                 {
-
-                    //if(customerDTO.Email != null)
-                    //{
-                    //    var sendMail = mailService.SendEmailNotification(customerDTO);
-
-                    //}
-
-                    //if (customerDTO.PhoneNumber != null)
-                    //{
-                    //    var s = iSMSService.SendCustomerSMS(customerDTO); 
-
-                    //}
-                        
-
                     return Json(new { success = true, responseText = "Customer has been successfully saved" });
                 }
                 else

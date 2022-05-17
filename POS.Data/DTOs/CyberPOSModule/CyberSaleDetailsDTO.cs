@@ -12,8 +12,7 @@ namespace POS.Data.DTOs.CyberPOSModule
         public Guid? CustomerId { get; set; }
         public string CustomerName { get; set; }
         public string SupplierName { get; set; }
-        public string ProductName { get; set; }
-
+        public string ServiceName { get; set; }
         public int? PaymentStatus { get; set; }
         public string PaymentStatusDescription { get; set; }
         public int Quantity { get; set; }

@@ -6,7 +6,8 @@ namespace POS.Data.Services.CyberPOSModule
 {
     public interface ICyberPOSService
     {
-        Task<CyberSaleDTO> AddSalesOrder(CyberSaleDTO  cyberSaleDTO);
-        Task<List<CyberSaleDetailsDTO>> GetAllSalesDetails();
+        Task<CyberSaleDTO> AddCreditServices(CyberSaleDTO  cyberSaleDTO);
+        Task<CyberSaleDTO> AddPaidServices(CyberSaleDTO  cyberSaleDTO);
+        List<CyberSaleDetailsDTO> GetAllSalesDetails();
     }
 }

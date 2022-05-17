@@ -20,5 +20,7 @@ namespace POS.Data.DTOs.CyberPOSModule
         public decimal Change { get; set; }
         public decimal CashPaid { get; set; }
         public IEnumerable<CyberSaleDetailsDTO> ListOfCyberSaleDetails { get; set; }
+
+        public int? PaymentStatus { get; set; }
     }
 }

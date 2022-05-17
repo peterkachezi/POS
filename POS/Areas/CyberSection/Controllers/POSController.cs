@@ -45,38 +45,96 @@ namespace POS.Areas.CyberSection.Controllers
         [HttpPost]
         public async Task<ActionResult> SaveTransaction(CyberSaleDTO  cyberSaleDTO)
         {
-            var user = await userManager.FindByEmailAsync(User.Identity.Name);
-
-            cyberSaleDTO.CreatedBy = user.Id;
-
-            cyberSaleDTO.Id = Guid.NewGuid();
-
-            var result = await cyberPOSService.AddSalesOrder(cyberSaleDTO);
-
-
-            if (result != null)
+            try
             {
+                var user = await userManager.FindByEmailAsync(User.Identity.Name);
 
-                //return Json(new { success = true, OrderId = salesDTO.Id, OrderNumber = salesDTO.OrderNumber, responseText = "Transaction was successfull" }, JsonRequestBehavior.AllowGet);
+                cyberSaleDTO.CreatedBy = user.Id;
 
-                return Json(new { success = true, responseText = cyberSaleDTO.OrderNumber });
+                cyberSaleDTO.Id = Guid.NewGuid();
 
+                var result = await cyberPOSService.AddPaidServices(cyberSaleDTO);
 
+                if (result != null)
+                {
+                    return Json(new { success = true, responseText = cyberSaleDTO.OrderNumber });
+
+                }
+
+                else
+                {
+                    return Json(new { success = false, responseText = "Transaction was not successfull" });
+                }
             }
-
-            else
+            catch (Exception ex)
             {
-                return Json(new { success = false, responseText = "Transaction was not successfull" });
+                Console.WriteLine(ex.Message);
+
+                return null;
             }
         }
 
-        public async Task<ActionResult> GetReceipt(string OrderNumber)
+        [HttpPost]
+        public async Task<ActionResult> SaveCreditTransaction(CyberSaleDTO cyberSaleDTO)
+        {
+
+            try
+            {
+                if (cyberSaleDTO.CustomerId == null || cyberSaleDTO.CustomerId == Guid.Empty)
+                {
+                    return Json(new { success = false, responseText = "Please select a customer and try again" });
+
+                }
+
+                var user = await userManager.FindByEmailAsync(User.Identity.Name);
+
+                cyberSaleDTO.CreatedBy = user.Id;
+
+                cyberSaleDTO.Id = Guid.NewGuid();
+
+                var result = await cyberPOSService.AddCreditServices(cyberSaleDTO);
+
+                if (result != null)
+                {
+
+                    return Json(new { success = true, responseText = cyberSaleDTO.OrderNumber });
+
+                }
+
+                else
+                {
+                    return Json(new { success = false, responseText = "Transaction was not successfull" });
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+
+                return null;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public ActionResult GetReceipt(string OrderNumber)
         {
             try
             {
                 var dt = new DataTable();
 
-                dt = await GetTransaction(OrderNumber);
+                dt = GetTransaction(OrderNumber);
 
                 string mimetype = "";
 
@@ -106,10 +164,9 @@ namespace POS.Areas.CyberSection.Controllers
             }
 
         }
-
-        public async Task<DataTable> GetTransaction(string OrderNumber)
+        public DataTable GetTransaction(string OrderNumber)
         {
-            var list = (await cyberPOSService.GetAllSalesDetails()).Where(x => x.OrderNumber == OrderNumber);
+            var list = cyberPOSService.GetAllSalesDetails().Where(x => x.OrderNumber == OrderNumber);
 
             var dt = new DataTable();
 

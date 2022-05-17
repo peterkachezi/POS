@@ -25,5 +25,6 @@ namespace POS.Data.Models
         [StringLength(100)]
         public string TaxAmount { get; set; }
         public int? PaymentStatus { get; set; }
+        public Guid? CustomerId { get; set; }
     }
 }

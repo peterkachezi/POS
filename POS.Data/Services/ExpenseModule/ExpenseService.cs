@@ -35,6 +35,8 @@ namespace POS.Data.Services.ExpenseModule
 
                     CreatedBy = expenseDTO.CreatedBy,
 
+                    ExpenseTypeId = expenseDTO.ExpenseTypeId,
+
                     FileAttchmentName = expenseDTO.FileAttchmentName,
 
                 };
