@@ -28,5 +28,7 @@ namespace POS.Data.DTOs.CyberPOSModule
         public decimal CashPaid { get; set; }
         public string TaxAmount { get; set; }
         public decimal Total { get; set; }
+
+        public DateTime OrderDate { get; set; }
     }
 }

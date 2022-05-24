@@ -3,5 +3,86 @@
     ViewData["Title"] = "Index";
     Layout = "~/Areas/CyberSection/Views/Shared/_Layout.cshtml";
 }
+<link href="~/css/style.css" rel="stylesheet" />
 
 
+<div class="row">
+    <div class="col-md-4 col-sm-4 ">
+        <div class="x_panel">
+            <div class="">
+                <h4 class="header">Sales Dump file </h4>
+            </div>
+            <div class="x_content">
+                <form action="~/CyberSection/SalesReport/DownloadAllSalesReport/" method="post">
+                    <div class="">
+                        <div class="">
+                            <input type="submit" class=" btn btn-primary col-md-12" value="Download ">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<div class="col-md-6 col-sm-12  ">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Input Mask</h2>
+
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br>
+                <form class="form-horizontal form-label-left">
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Date Mask</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                            <input type="text" class="form-control">
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Phone mask</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                            <input type="text" class="form-control">
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-3">Custom Mask</label>
+                        <div class="col-md-9 col-sm-9 col-xs-9">
+                            <input type="text" class="form-control">
+
+                        </div>
+                    </div>
+
+                    <div class="ln_solid"></div>
+
+                    <div class="form-group row">
+                        <div class="col-md-9 offset-md-3">
+                            <button type="submit" class="btn btn-primary">Cancel</button>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>*@

@@ -99,7 +99,7 @@ namespace POS.Controllers
                         }
 
 
-                        if (getUserRole == "CyberAdmin")
+                        if (getUserRole == "CyberAdmin" || getUserRole== "User")
                         {
                             return RedirectToAction("Index", "Dashboard", new { area = "CyberSection" });
                         }

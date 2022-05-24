@@ -131,7 +131,41 @@ namespace POS.SeedAppUsers
                 }
                 #endregion
 
+                #region User
+                var cyberuser = userManager.FindByEmailAsync("user@gmail.com");
 
+                if (cyberuser.Result == null)
+                {
+                    var user = new AppUser();
+
+                    user.UserName = "user@gmail.com";
+
+                    user.Email = "user@gmail.com";
+
+                    user.PhoneNumber = "0704509484";
+
+                    user.FirstName = "Peter";
+
+                    user.LastName = "Kachezi";
+
+                    user.EmailConfirmed = true;
+
+                    user.IsActive = true;
+
+                    user.CreateDate = DateTime.Now;
+
+                    string userPWD = "User@2022";
+
+                    var chkUser = userManager.CreateAsync(user, userPWD);
+
+                    //Add default User to Role Admin    
+                    if (chkUser.Result.Succeeded)
+                    {
+                        userManager.AddToRoleAsync(user, "User").Wait();
+
+                    }
+                }
+                #endregion
             }
             catch (Exception ex)
             {

@@ -12,11 +12,12 @@ namespace POS.Data.Models
         {
 
         }
-        public virtual DbSet<CyberSaleDetail>  CyberSaleDetails { get; set; }
-        public virtual DbSet<AppUser>  AppUsers  { get; set; }
-        public virtual DbSet<CyberSale>   CyberSales { get; set; }
-        public virtual DbSet<Expense>  Expenses { get; set; }
-        public virtual DbSet<ExpenseType>  ExpenseTypes { get; set; }
+        public virtual DbSet<PaymentType> PaymentTypes { get; set; }
+        public virtual DbSet<CyberSaleDetail> CyberSaleDetails { get; set; }
+        public virtual DbSet<AppUser> AppUsers { get; set; }
+        public virtual DbSet<CyberSale> CyberSales { get; set; }
+        public virtual DbSet<Expense> Expenses { get; set; }
+        public virtual DbSet<ExpenseType> ExpenseTypes { get; set; }
         public virtual DbSet<ProductName> ProductNames { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<CustomerOrder> CustomerOrders { get; set; }

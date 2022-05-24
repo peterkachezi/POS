@@ -37,6 +37,8 @@ namespace POS.Data.Services.ExpenseModule
 
                     ExpenseTypeId = expenseDTO.ExpenseTypeId,
 
+                    PaymentTypeId = expenseDTO.PaymentTypeId,
+
                     FileAttchmentName = expenseDTO.FileAttchmentName,
 
                 };
@@ -92,6 +94,8 @@ namespace POS.Data.Services.ExpenseModule
 
                                join et in context.ExpenseTypes on e.ExpenseTypeId equals et.Id
 
+                               join pt in context.PaymentTypes on e.PaymentTypeId equals pt.Id
+
                                select new ExpenseDTO
                                {
                                    Id = e.Id,
@@ -99,6 +103,10 @@ namespace POS.Data.Services.ExpenseModule
                                    Amount = e.Amount,
 
                                    ExpenseTypeId = e.ExpenseTypeId,
+
+                                   PaymentTypeId = e.PaymentTypeId,
+
+                                   PaymentTypeName = pt.Name,
 
                                    ExpenseTypeName = et.Name,
 
@@ -138,6 +146,8 @@ namespace POS.Data.Services.ExpenseModule
 
                                join et in context.ExpenseTypes on e.ExpenseTypeId equals et.Id
 
+                               join pt in context.PaymentTypes on e.PaymentTypeId equals pt.Id
+
                                where Id == e.Id
 
                                select new ExpenseDTO
@@ -147,6 +157,10 @@ namespace POS.Data.Services.ExpenseModule
                                    Amount = e.Amount,
 
                                    ExpenseTypeId = e.ExpenseTypeId,
+
+                                   PaymentTypeId = e.PaymentTypeId,
+
+                                   PaymentTypeName = pt.Name,
 
                                    ExpenseTypeName = et.Name,
 

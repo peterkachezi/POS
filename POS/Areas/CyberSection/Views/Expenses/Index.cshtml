@@ -38,6 +38,7 @@
 
                                     <th scope="col">No</th>
                                     <th scope="col">Expense Type</th>
+                                    <th scope="col">PaymentType </th>
                                     <th scope="col">Amount</th>
                                     <th scope="col">Description</th>
                                     <th scope="col">Created By</th>
@@ -85,15 +86,30 @@
                         </div>
                     </div>
 
-                    <div class="input-group">
-                        <div class="col-md-6">
-                            <label class="text-dark">Description</label>
-                            <div>
-                                <textarea class="form-control myinputs" rows="3" id="txtDescription" name="Description"></textarea>
 
+                    <div class="input-group">
+
+
+                        <div class="col-md-6">
+                            <label class="text-dark">Payment Type *</label>
+                            <div>
+                                <select class="form-control myinputs" id="txtPaymentType" name="PaymentTypeId">
+                                    <option value="" selected disabled hidden>Select Here</option>
+
+                                    @if (ViewBag.PaymentTypes != null)
+                                    {
+                                        foreach (var item in ViewBag.PaymentTypes)
+                                        {
+
+                                            <option value="@item.Id">@item.Name</option>
+
+
+                                        }
+                                    }
+
+                                </select>
                             </div>
                         </div>
-
 
                         <div class="col-md-4">
                             <label class="text-dark">Expense Type</label>
@@ -115,15 +131,29 @@
                                 </select>
                             </div>
                         </div>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <div class="col-md-12">
+                            <label class="text-dark">Description</label>
+                            <div>
+                                <textarea class="form-control myinputs" rows="3" id="txtDescription" name="Description"></textarea>
+
+                            </div>
+                        </div>
+
+           
                     </div>
 
 
                     @*<div class="col-md-4">
-                            <label class="text-dark">Attach File</label>
-                            <div>
-                                <input type="file" class="form-control" name="ImageName">
-                            </div>
-                        </div>*@
+            <label class="text-dark">Attach File</label>
+            <div>
+                <input type="file" class="form-control" name="ImageName">
+            </div>
+        </div>*@
 
 
                 </form>
@@ -275,6 +305,7 @@
 
                 { "data": "id" },
                 { "data": "expenseTypeName" },
+                { "data": "paymentTypeName" },
                 { "data": "amount" },
                 { "data": "description" },
                 { "data": "createdByName" },

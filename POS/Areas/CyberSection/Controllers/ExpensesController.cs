@@ -6,6 +6,7 @@ using POS.Data.DTOs.ExpenseModule;
 using POS.Data.Models;
 using POS.Data.Services.ExpenseModule;
 using POS.Data.Services.ExpenseTypeModule;
+using POS.Data.Services.PaymentTypeModule;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,8 +25,10 @@ namespace POS.Areas.CyberSection.Controllers
 
         private readonly IWebHostEnvironment env;
 
+        private readonly IPaymentTypeService paymentTypeService;
+
         private readonly UserManager<AppUser> userManager;
-        public ExpensesController(IExpenseTypeService expenseTypeService, IWebHostEnvironment env, UserManager<AppUser> userManager, IExpenseService expenseService)
+        public ExpensesController(IPaymentTypeService paymentTypeService,IExpenseTypeService expenseTypeService, IWebHostEnvironment env, UserManager<AppUser> userManager, IExpenseService expenseService)
         {
             this.expenseTypeService = expenseTypeService;
 
@@ -34,10 +37,14 @@ namespace POS.Areas.CyberSection.Controllers
             this.expenseService = expenseService;
 
             this.userManager = userManager;
+
+            this.paymentTypeService = paymentTypeService;
         }
         public async Task<IActionResult> Index()
         {
             ViewBag.ExpenseTypes = await expenseTypeService.GetAll();
+
+            ViewBag.PaymentTypes = await paymentTypeService.GetAll();
 
             return View();
         }
