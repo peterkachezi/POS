@@ -17,6 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\dashboard\vendors\DateJS\build\date-quz-EC.js" />
+    <Content Remove="wwwroot\Reports\Invoice.rdlc" />
     <Content Remove="wwwroot\Reports\Receipt.rdlc" />
   </ItemGroup>
 
@@ -237,6 +239,7 @@
     <None Include="wwwroot\login\img\avatar.svg" />
     <None Include="wwwroot\login\img\bg.svg" />
     <None Include="wwwroot\login\js\main.js" />
+    <None Include="wwwroot\Reports\Invoice.rdlc" />
     <None Include="wwwroot\Reports\Receipt.rdlc" />
   </ItemGroup>
 

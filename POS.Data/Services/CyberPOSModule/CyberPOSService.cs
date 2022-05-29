@@ -13,7 +13,6 @@ namespace POS.Data.Services.CyberPOSModule
     public class CyberPOSService : ICyberPOSService
     {
         private readonly ApplicationDbContext context;
-
         public CyberPOSService(ApplicationDbContext context)
         {
             this.context = context;
@@ -66,7 +65,7 @@ namespace POS.Data.Services.CyberPOSModule
 
                         orderlist.OrderId = cyberSaleDTO.Id;
 
-                        orderlist.ProductId = item.ProductId;
+                        orderlist.ServiceId = item.ServiceId;
 
                         orderlist.Quantity = item.Quantity;
 
@@ -105,7 +104,6 @@ namespace POS.Data.Services.CyberPOSModule
             }
 
         }
-
         public async Task<CyberSaleDTO> AddCreditServices(CyberSaleDTO cyberSaleDTO)
         {
             try
@@ -155,7 +153,7 @@ namespace POS.Data.Services.CyberPOSModule
 
                         orderlist.OrderId = cyberSaleDTO.Id;
 
-                        orderlist.ProductId = item.ProductId;
+                        orderlist.ServiceId = item.ServiceId;
 
                         orderlist.Quantity = item.Quantity;
 
@@ -194,7 +192,6 @@ namespace POS.Data.Services.CyberPOSModule
             }
 
         }
-
         public List<CyberSaleDTO> GetAllPendingPayments()
         {
             try
@@ -229,7 +226,7 @@ namespace POS.Data.Services.CyberPOSModule
 
                                         Change = sales.Change,
 
-                                    }).ToList();
+                                    }).OrderByDescending(x=>x.OrderDate).ToList();
 
                 return salesdetails;
             }
@@ -246,7 +243,7 @@ namespace POS.Data.Services.CyberPOSModule
 
                                 join u in context.AppUsers on sd.CreatedBy equals u.Id
 
-                                join s in context.CyberServices on sd.ProductId equals s.Id
+                                join s in context.CyberServices on sd.ServiceId equals s.Id
 
                                 select new CyberSaleDetailsDTO
                                 {
@@ -255,7 +252,7 @@ namespace POS.Data.Services.CyberPOSModule
 
                                     OrderId = sd.OrderId,
 
-                                    ProductId = sd.ProductId,
+                                    ServiceId = sd.ServiceId,
 
                                     Quantity = sd.Quantity,
 
@@ -285,17 +282,15 @@ namespace POS.Data.Services.CyberPOSModule
 
             return salesdetails;
         }
-
-
         public List<CyberSaleDetailsDTO> GetAllSalesDetailsByOrderId(Guid Id)
         {
             var salesdetails = (from sd in context.CyberSaleDetails
 
                                 join u in context.AppUsers on sd.CreatedBy equals u.Id
 
-                                join s in context.CyberServices on sd.ProductId equals s.Id
+                                join s in context.CyberServices on sd.ServiceId equals s.Id
 
-                                where sd.OrderId==Id
+                                where sd.OrderId == Id
 
                                 select new CyberSaleDetailsDTO
                                 {
@@ -304,7 +299,7 @@ namespace POS.Data.Services.CyberPOSModule
 
                                     OrderId = sd.OrderId,
 
-                                    ProductId = sd.ProductId,
+                                    ServiceId = sd.ServiceId,
 
                                     Quantity = sd.Quantity,
 
@@ -331,6 +326,53 @@ namespace POS.Data.Services.CyberPOSModule
                                 }).OrderByDescending(x => x.CreateDate).ToList();
 
             return salesdetails;
+        }
+
+        public CyberSaleDTO GetSalesById(Guid Id)
+        {
+            try
+            {
+                var cyberSaleOrder = (from cs in context.CyberSales
+
+                                      join c in context.Customers on cs.CustomerId equals c.Id
+
+                                      where cs.Id==Id
+
+                                      select new CyberSaleDTO
+                                      {
+                                          Id = cs.Id,
+
+                                          CustomerId = cs.CustomerId,
+
+                                          CustomerName = c.FirstName + " " + c.LastName,
+
+                                          CustomerPhoneNumber = c.PhoneNumber,
+
+                                          OrderDate = cs.OrderDate,
+
+                                          CreatedBy = cs.CreatedBy,
+
+                                          TotalAmount = cs.TotalAmount,
+
+                                          OrderNumber = cs.OrderNumber,
+
+                                          CashPaid = cs.CashPaid,
+
+                                          Change = cs.Change,
+
+                                          PaymentStatus = cs.PaymentStatus,
+
+                                      }).FirstOrDefault();
+
+                return cyberSaleOrder;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+
+                return null;
+            }
+
         }
     }
 }

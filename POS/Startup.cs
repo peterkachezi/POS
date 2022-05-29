@@ -15,6 +15,7 @@ using POS.Data.Services.CyberPOSModule;
 using POS.Data.Services.CyberServiceModule;
 using POS.Data.Services.ExpenseModule;
 using POS.Data.Services.ExpenseTypeModule;
+using POS.Data.Services.InvoiceModule;
 using POS.Data.Services.PaymentTypeModule;
 using POS.Data.Services.ProductModule;
 using POS.Data.Services.SalesModule;
@@ -83,6 +84,8 @@ namespace POS
             services.AddScoped<IApplicationUserService, ApplicationUserService>();
 
             services.AddScoped<IPaymentTypeService, PaymentTypeService>();
+
+            services.AddScoped<IInvoiceService, InvoiceService>();
             
         }
 

@@ -53,7 +53,7 @@
                             <div class="form-group">
                                 Item Name:
                                 <input type="text" id="txtServiceName" name="ItemName" class="form-control" />
-                                <input type="text" id="txtService_Id" name="ProductId" class="form-control" />
+                                <input type="text" id="txtService_Id" name="ServiceId" class="form-control" />
                             </div>
 
                         </div>
@@ -360,7 +360,7 @@
 
             var SalesOrderDetailsDTO = {};
             SalesOrderDetailsDTO.Total = parseFloat($(this).find("td:eq(5)").text());
-            SalesOrderDetailsDTO.ProductId = $(this).find("td:eq(0)").text();
+            SalesOrderDetailsDTO.ServiceId = $(this).find("td:eq(0)").text();
             SalesOrderDetailsDTO.SellingPrice = parseFloat($(this).find("td:eq(2)").text());
             SalesOrderDetailsDTO.Quantity = parseFloat($(this).find("td:eq(3)").text());
             SalesOrderDetailsDTO.Discount = parseFloat($(this).find("td:eq(4)").text());
@@ -465,17 +465,17 @@
         var SellingPrice = parseFloat($("[id*=txtServiceAmount]").val());
         var Quantity = parseFloat($("[id*=txtQuantity]").val());
         var Discount = parseFloat($("[id*=txtDiscount]").val());
-        var ProductId = $("[id*=txtService_Id]").val();
+        var ServiceId = $("[id*=txtService_Id]").val();
         var ItemName = $("#txtServiceName").val();
         var Total = parseFloat(SellingPrice * Quantity) - Discount;
 
-        console.log(ProductId)
+        console.log(ServiceId)
 
 
         var ItemList =
 
             "<tr><td hidden>" +
-            ProductId +
+            ServiceId +
             "</td><td>" +
             ItemName +
             "</td><td>" +

@@ -14,6 +14,7 @@ namespace POS.Data.DTOs.CyberPOSModule
         public string CreatedBy { get; set; }
         public string CreatedByName { get; set; }
         public string CustomerName { get; set; }
+        public string CustomerPhoneNumber { get; set; }
         public string ProductName { get; set; }
         public decimal TotalAmount { get; set; }
         public string OrderNumber { get; set; }

@@ -25,7 +25,6 @@ namespace POS.Services
 
             this.env = env;
         }
-
         public bool PasswordResetEmailNotification(ResetPasswordDTO resetPasswordDTO)
         {
             throw new NotImplementedException();
@@ -142,6 +141,6 @@ namespace POS.Services
             }
         }
 
-  
+
     }
 }

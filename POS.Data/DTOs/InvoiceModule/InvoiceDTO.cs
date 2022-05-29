@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace POS.Data.Models
+namespace POS.Data.DTOs.InvoiceModule
 {
-    public partial class Invoice
+   public class InvoiceDTO
     {
         public Guid Id { get; set; }
         public Guid CustomerId { get; set; }

@@ -9,7 +9,7 @@ namespace POS.Data.Models
     {
         public Guid Id { get; set; }
         public Guid OrderId { get; set; }
-        public Guid ProductId { get; set; }
+        public Guid ServiceId { get; set; }
         public int Quantity { get; set; }
         public decimal SellingPrice { get; set; }
         public decimal Discount { get; set; }

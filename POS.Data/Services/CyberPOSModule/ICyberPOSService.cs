@@ -12,5 +12,6 @@ namespace POS.Data.Services.CyberPOSModule
         List<CyberSaleDetailsDTO> GetAllSalesDetails();
         List<CyberSaleDTO> GetAllPendingPayments();
         List<CyberSaleDetailsDTO> GetAllSalesDetailsByOrderId(Guid Id);
+        CyberSaleDTO GetSalesById(Guid Id);
     }
 }

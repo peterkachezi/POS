@@ -8,9 +8,10 @@ namespace POS.Data.DTOs.CyberPOSModule
     {
         public System.Guid Id { get; set; }
         public System.Guid OrderId { get; set; }
-        public System.Guid ProductId { get; set; }
+        public System.Guid ServiceId { get; set; }
         public Guid? CustomerId { get; set; }
         public string CustomerName { get; set; }
+  
         public string SupplierName { get; set; }
         public string ServiceName { get; set; }
         public int? PaymentStatus { get; set; }
